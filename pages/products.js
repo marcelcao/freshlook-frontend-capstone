@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getProducts } from '../utils/data/productData';
 import { useAuth } from '../utils/context/authContext';
 import ProductCard from '../components/ProductCard';
+import ProductModal from '../components/ProductModal';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -19,10 +20,15 @@ function Products() {
 
   return (
     <div>
-      <h1>Your Products</h1>
-      {products.map((product) => (
-        <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} />
-      ))}
+      <div>
+        <h1>Your Products</h1>
+        <ProductModal />
+      </div>
+      <div>
+        {products.map((product) => (
+          <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} />
+        ))}
+      </div>
     </div>
   );
 }

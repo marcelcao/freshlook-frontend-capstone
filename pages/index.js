@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getRoutines } from '../utils/data/routineData';
 import { useAuth } from '../utils/context/authContext';
 import RoutineCard from '../components/RoutineCard';
+import RoutineModal from '../components/RoutineModal';
 
 function Home() {
   const [routines, setRoutines] = useState([]);
@@ -19,10 +20,15 @@ function Home() {
 
   return (
     <div>
-      <h1>Welcome back, {user.displayName}</h1>
-      {routines.map((routine) => (
-        <RoutineCard key={routine.firebaseKey} routineObj={routine} onUpdate={getAllRoutines} />
-      ))}
+      <div>
+        <h1>Welcome back, {user.displayName}</h1>
+        <RoutineModal />
+      </div>
+      <div>
+        {routines.map((routine) => (
+          <RoutineCard key={routine.firebaseKey} routineObj={routine} onUpdate={getAllRoutines} />
+        ))}
+      </div>
     </div>
   );
 }
