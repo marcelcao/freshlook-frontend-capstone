@@ -56,13 +56,15 @@ function ProductModal({ obj }) {
     }
   };
 
+  const reload = () => window.location.reload();
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
         Add Product
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} onExit={reload}>
         <Modal.Header closeButton>
           <h2 className="form-label">{obj.firebaseKey ? 'Update' : 'Add'} Product</h2>
         </Modal.Header>

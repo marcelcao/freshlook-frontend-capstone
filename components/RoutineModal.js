@@ -55,13 +55,15 @@ function RoutineModal({ obj }) {
     }
   };
 
+  const reload = () => window.location.reload();
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
         New Routine
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} onExit={reload}>
         <Modal.Header closeButton>
           <h2 className="form-label">{obj.firebaseKey ? 'Update' : 'Create'} Routine</h2>
         </Modal.Header>
