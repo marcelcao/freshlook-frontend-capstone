@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Link from 'next/link';
 import { deleteSingleProduct } from '../utils/data/productData';
 
 // need to add link to edit button using modal //
@@ -18,7 +19,9 @@ export default function ProductCard({ prodObj, onUpdate }) {
       <Card.Img variant="top" src={prodObj.prodImg} alt={prodObj.prodName} style={{ height: '8em' }} className="product-img" />
       <Card.Body>
         <Card.Title>{prodObj.prodName} </Card.Title>
-        <Card.Title className="prod-description">{prodObj.prodDescription}</Card.Title>
+        <Link href={`/product/${prodObj.firebaseKey}`} passHref>
+          <Button variant="primary" className="m-2">VIEW</Button>
+        </Link>
         <Button onClick={deleteThisProduct} className="prod-delete">
           DELETE
         </Button>
