@@ -36,6 +36,8 @@ function ProductModal({ obj }) {
     }));
   };
 
+  const reload = () => window.location.reload();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.firebaseKey) {
@@ -51,20 +53,19 @@ function ProductModal({ obj }) {
         updateProduct(patchPayload).then(() => {
           handleClose();
           router.push('/products');
+          reload();
         });
       });
     }
   };
 
-  const reload = () => window.location.reload();
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Add Product
+        <p className="form-label">{obj.firebaseKey ? 'Update' : 'Add'} Product</p>
       </Button>
 
-      <Modal show={show} onHide={handleClose} onExit={reload}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <h2 className="form-label">{obj.firebaseKey ? 'Update' : 'Add'} Product</h2>
         </Modal.Header>
