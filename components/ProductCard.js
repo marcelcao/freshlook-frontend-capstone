@@ -22,6 +22,9 @@ export default function ProductCard({ prodObj, onUpdate }) {
         <Link href={`/product/${prodObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
         </Link>
+        <Link href={`/product/edit/${prodObj.firebaseKey}`} passHref>
+          <Button variant="primary" className="m-2">EDIT</Button>
+        </Link>
         <Button onClick={deleteThisProduct} className="prod-delete">
           DELETE
         </Button>
