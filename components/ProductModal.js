@@ -43,7 +43,8 @@ function ProductModal({ obj }) {
     if (obj.firebaseKey) {
       updateProduct(formInput).then(() => {
         handleClose();
-        router.push('/products');
+        router.push(`/product/edit/${obj.firebaseKey}`);
+        reload();
       });
     } else {
       const payload = { ...formInput, uid: user.uid };
