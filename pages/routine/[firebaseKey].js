@@ -17,17 +17,13 @@ function ViewRoutine() {
   };
 
   const getRoutProds = () => {
-    getRoutineProducts(firebaseKey).then(setRoutProds);
+    getRoutineProducts(firebaseKey).then(setRoutProds).then(console.warn('routprods func', routProds));
   };
 
   useEffect(() => {
     getRoutDetails();
     getRoutProds();
   }, [firebaseKey]);
-
-  // useEffect(() => {
-  //   getRoutProds();
-  // }, [firebaseKey]);
 
   return (
     <>

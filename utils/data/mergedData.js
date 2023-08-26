@@ -20,8 +20,8 @@ const getProdByRoutine = (routineId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getProdById = (productId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/routineproducts.json?orderBy="productId"&equalTo="${productId}"`, {
+const getProdById = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/products.json?orderBy="firebaseKey"&equalTo="${firebaseKey}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -65,14 +65,13 @@ const updateRoutineProduct = (payload) => new Promise((resolve, reject) => {
 });
 
 const getRoutineProducts = (routineId) => new Promise((resolve, reject) => {
-  console.warn(routineId);
+  console.warn('routine id', routineId);
   getProdByRoutine(routineId)
-    .then((productId) => {
-      getProdById(productId)
+    .then((product) => {
+      getProdById(product.firebaseKey)
         .then((prodsArray) => {
-          resolve({ ...productId, products: prodsArray });
-          console.warn(prodsArray);
-          console.warn(productId);
+          resolve([{ ...product, products: prodsArray }]);
+          console.warn('prods array', prodsArray);
         });
     }).catch((error) => reject(error));
 });
