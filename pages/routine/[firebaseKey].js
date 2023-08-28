@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getSingleRoutine } from '../../utils/data/routineData';
-import { getRoutineProducts } from '../../utils/data/mergedData';
+import { getProdByRoutine } from '../../utils/data/mergedData';
 import ProductCard from '../../components/ProductCard';
 
 function ViewRoutine() {
@@ -17,7 +17,9 @@ function ViewRoutine() {
   };
 
   const getRoutProds = () => {
-    getRoutineProducts(firebaseKey).then(setRoutProds).then(console.warn('routprods func', routProds));
+    getProdByRoutine(firebaseKey)
+      .then(setRoutProds);
+    (console.warn('routprods func', firebaseKey));
   };
 
   useEffect(() => {

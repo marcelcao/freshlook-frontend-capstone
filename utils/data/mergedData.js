@@ -20,8 +20,8 @@ const getProdByRoutine = (routineId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getProdById = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/products.json?orderBy="firebaseKey"&equalTo="${firebaseKey}"`, {
+const getProdById = (productId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/routineproducts.json?orderBy="firebaseKey"&equalTo="${productId}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -64,22 +64,22 @@ const updateRoutineProduct = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getRoutineProducts = (routineId) => new Promise((resolve, reject) => {
-  console.warn('routine id', routineId);
-  getProdByRoutine(routineId)
-    .then((product) => {
-      getProdById(product.firebaseKey)
-        .then((prodsArray) => {
-          resolve([{ ...product, products: prodsArray }]);
-          console.warn('prods array', prodsArray);
-        });
-    }).catch((error) => reject(error));
-});
+// const getRoutineProducts = (routineId) => new Promise((resolve, reject) => {
+//   console.warn('routine id', routineId);
+//   getProdByRoutine(routineId)
+//     .then((product) => {
+//       getProdById(product.productId)
+//         .then((prodsArray) => {
+//           resolve([{ ...product, products: prodsArray }]);
+//           console.warn('prods array', prodsArray);
+//         });
+//     }).catch((error) => reject(error));
+// });
 
 export {
   getProdByRoutine,
   getProdById,
   addProdToRoutine,
   updateRoutineProduct,
-  getRoutineProducts,
+  // getRoutineProducts,
 };

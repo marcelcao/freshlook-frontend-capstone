@@ -10,19 +10,19 @@ import { deleteSingleProduct } from '../utils/data/productData';
 export default function ProductCard({ prodObj, onUpdate }) {
   const deleteThisProduct = () => {
     if (window.confirm('Delete this product?')) {
-      deleteSingleProduct(prodObj.firebaseKey).then(() => onUpdate());
+      deleteSingleProduct(prodObj.productId).then(() => onUpdate());
     }
   };
 
   return (
     <Card style={{ width: '18rem', margin: '10px' }} className="product-card">
-      <Card.Img variant="top" src={prodObj.prodImg} alt={prodObj.prodName} style={{ height: '8em' }} className="product-img" />
+      <Card.Img variant="top" src={prodObj.prodImg} alt={prodObj.productId} style={{ height: '8em' }} className="product-img" />
       <Card.Body>
         <Card.Title>{prodObj.prodName} </Card.Title>
-        <Link href={`/product/${prodObj.firebaseKey}`} passHref>
+        <Link href={`/product/${prodObj.productId}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
         </Link>
-        <Link href={`/product/edit/${prodObj.firebaseKey}`} passHref>
+        <Link href={`/product/edit/${prodObj.productId}`} passHref>
           <Button variant="primary" className="m-2">EDIT</Button>
         </Link>
         <Button onClick={deleteThisProduct} className="prod-delete">
@@ -39,6 +39,7 @@ ProductCard.propTypes = {
     prodName: PropTypes.string,
     prodDescription: PropTypes.string,
     firebaseKey: PropTypes.string,
+    productId: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
