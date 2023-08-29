@@ -12,6 +12,7 @@ function Products() {
 
   const getAllProducts = () => {
     getProducts(user.uid).then(setProducts);
+    console.warn(getAllProducts);
   };
 
   useEffect(() => {

@@ -4,11 +4,14 @@ import { useRouter } from 'next/router';
 import { getSingleRoutine } from '../../utils/data/routineData';
 import { getProdByRoutine } from '../../utils/data/mergedData';
 import ProductCard from '../../components/ProductCard';
+import { getProducts } from '../../utils/data/productData';
+import { useAuth } from '../../utils/context/authContext';
 
 function ViewRoutine() {
   const [routDetails, setRoutDetails] = useState({});
   const [routProds, setRoutProds] = useState([]);
   const router = useRouter();
+  const { user } = useAuth();
 
   const { firebaseKey } = router.query;
 
@@ -19,7 +22,24 @@ function ViewRoutine() {
   const getRoutProds = () => {
     getProdByRoutine(firebaseKey)
       .then(setRoutProds);
-    (console.warn('routprods func', firebaseKey));
+  };
+
+  const getAllUserProducts = () => getProducts(user.uid);
+
+  const getAllRoutineProducts = () => {
+    const allProdsById = getAllUserProducts().filter((product) => product.productId);
+    const routProdsById = routProds.filter((routProd) => routProd.productId);
+
+    let matchId = [];
+
+    allProdsById.forEach((userProd) => {
+      routProdsById.forEach((routProd) => {
+        if (userProd.productId === routProd.productId) {
+          matchId = userProd;
+        }
+      });
+    });
+    return matchId;
   };
 
   useEffect(() => {
@@ -41,11 +61,10 @@ function ViewRoutine() {
         <div>
           <h2>Your Routine Products</h2>
           {routProds.map((routProd) => (
-            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getRoutProds} />
+            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getAllRoutineProducts} />
           ))}
         </div>
       </div>
-
     </>
   );
 }
