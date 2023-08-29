@@ -64,6 +64,18 @@ const updateRoutineProduct = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteRoutProd = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/routineproducts/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 // const getRoutineProducts = (routineId) => new Promise((resolve, reject) => {
 //   console.warn('routine id', routineId);
 //   getProdByRoutine(routineId)
@@ -82,4 +94,5 @@ export {
   addProdToRoutine,
   updateRoutineProduct,
   // getRoutineProducts,
+  deleteRoutProd,
 };

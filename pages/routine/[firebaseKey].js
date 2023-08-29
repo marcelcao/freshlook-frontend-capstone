@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getSingleRoutine } from '../../utils/data/routineData';
-import { getProdByRoutine } from '../../utils/data/mergedData';
+import { getProdByRoutine, deleteRoutProd } from '../../utils/data/mergedData';
 import ProductCard from '../../components/ProductCard';
 import { getProducts } from '../../utils/data/productData';
 import { useAuth } from '../../utils/context/authContext';
@@ -42,6 +42,12 @@ function ViewRoutine() {
     return matchId;
   };
 
+  const deleteProdInRout = ({ prodObj, onUpdate }) => {
+    if (window.confirm('Delete this product?')) {
+      deleteRoutProd(prodObj.firebaseKey).then(() => onUpdate());
+    }
+  };
+
   useEffect(() => {
     getRoutDetails();
     getRoutProds();
@@ -61,7 +67,7 @@ function ViewRoutine() {
         <div>
           <h2>Your Routine Products</h2>
           {routProds.map((routProd) => (
-            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getAllRoutineProducts} />
+            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getAllRoutineProducts} onClick={deleteProdInRout} />
           ))}
         </div>
       </div>

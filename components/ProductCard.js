@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import { deleteSingleProduct } from '../utils/data/productData';
+// import { deleteSingleProduct } from '../utils/data/productData';
 
 // need to add link to edit button using modal //
 
-export default function ProductCard({ prodObj, onUpdate }) {
-  const deleteThisProduct = () => {
-    if (window.confirm('Delete this product?')) {
-      deleteSingleProduct(prodObj.productId).then(() => onUpdate());
-    }
-  };
+export default function ProductCard({ prodObj, onClick }) {
+  // const deleteThisProduct = () => {
+  //   if (window.confirm('Delete this product?')) {
+  //     deleteSingleProduct(prodObj.firebaseKey).then(() => onUpdate());
+  //   }
+  // };
 
   return (
     <Card style={{ width: '18rem', margin: '10px' }} className="product-card">
@@ -25,7 +25,7 @@ export default function ProductCard({ prodObj, onUpdate }) {
         <Link href={`/product/edit/${prodObj.productId}`} passHref>
           <Button variant="primary" className="m-2">EDIT</Button>
         </Link>
-        <Button onClick={deleteThisProduct} className="prod-delete">
+        <Button onClick={onClick} className="prod-delete">
           DELETE
         </Button>
       </Card.Body>
@@ -41,5 +41,5 @@ ProductCard.propTypes = {
     firebaseKey: PropTypes.string,
     productId: PropTypes.string,
   }).isRequired,
-  onUpdate: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
