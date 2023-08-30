@@ -60,7 +60,7 @@ function RoutineModal({ obj }) {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        New Routine
+        <p className="form-label">{obj.firebaseKey ? 'Update' : 'Create'} Routine</p>
       </Button>
 
       <Modal show={show} onHide={handleClose} onExit={reload}>

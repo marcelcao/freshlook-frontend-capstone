@@ -49,7 +49,7 @@ function ProductModal({ obj }) {
     } else {
       const payload = { ...formInput, uid: user.uid };
       createProduct(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
+        const patchPayload = { firebaseKey: name, productId: name };
 
         updateProduct(patchPayload).then(() => {
           handleClose();
