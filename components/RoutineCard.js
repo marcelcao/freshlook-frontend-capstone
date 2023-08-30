@@ -21,6 +21,9 @@ export default function RoutineCard({ routineObj, onUpdate }) {
         <Link href={`/routine/${routineObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
         </Link>
+        <Link href={`/routine/${routineObj.firebaseKey}`} passHref>
+          <Button variant="primary" className="m-2">EDIT</Button>
+        </Link>
         <Button onClick={deleteThisRoutine} className="routine-delete">
           DELETE
         </Button>

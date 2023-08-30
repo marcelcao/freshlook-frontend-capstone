@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { getSingleRoutine } from '../../utils/data/routineData';
 import { getProdByRoutine } from '../../utils/data/mergedData';
 import ProductCard from '../../components/ProductCard';
+import RoutineModal from '../../components/RoutineModal';
 import { getProducts } from '../../utils/data/productData';
 import { useAuth } from '../../utils/context/authContext';
 
@@ -30,12 +31,12 @@ function ViewRoutine() {
     const allProdsById = getAllUserProducts().filter((product) => product.productId);
     const routProdsById = routProds.filter((routProd) => routProd.productId);
 
-    let matchId = [];
+    const matchId = [];
 
     allProdsById.forEach((userProd) => {
       routProdsById.forEach((routProd) => {
         if (userProd.productId === routProd.productId) {
-          matchId = userProd;
+          matchId.push(userProd);
         }
       });
     });
@@ -57,6 +58,7 @@ function ViewRoutine() {
           <h2>
             {routDetails.routineDescription}
           </h2>
+          <RoutineModal obj={routDetails} key={firebaseKey} />
         </div>
         <div>
           <h2>Your Routine Products</h2>
