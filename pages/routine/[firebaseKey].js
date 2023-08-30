@@ -11,6 +11,8 @@ import { useAuth } from '../../utils/context/authContext';
 function ViewRoutine() {
   const [routDetails, setRoutDetails] = useState({});
   const [routProds, setRoutProds] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [matchedProducts, setMatchedProducts] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
@@ -20,33 +22,37 @@ function ViewRoutine() {
     getSingleRoutine(firebaseKey).then(setRoutDetails);
   };
 
+  const getAllRoutineProducts = () => {
+    const routProdsById = routProds.map((routProd) => routProd.productId);
+
+    const matched = [];
+
+    products.forEach((userProd) => {
+      routProdsById.forEach((routProd) => {
+        if (userProd.productId === routProd) {
+          matched.push(userProd);
+        }
+      });
+    });
+    setMatchedProducts(matched);
+  };
+
   const getRoutProds = () => {
     getProdByRoutine(firebaseKey)
       .then(setRoutProds);
   };
 
-  const getAllUserProducts = () => getProducts(user.uid);
-
-  const getAllRoutineProducts = () => {
-    const allProdsById = getAllUserProducts().filter((product) => product.productId);
-    const routProdsById = routProds.filter((routProd) => routProd.productId);
-
-    const matchId = [];
-
-    allProdsById.forEach((userProd) => {
-      routProdsById.forEach((routProd) => {
-        if (userProd.productId === routProd.productId) {
-          matchId.push(userProd);
-        }
+  useEffect(() => {
+    getProducts(user.uid).then(setProducts)
+      .then(() => {
+        getRoutDetails();
+        getRoutProds();
       });
-    });
-    return matchId;
-  };
+  }, [firebaseKey]);
 
   useEffect(() => {
-    getRoutDetails();
-    getRoutProds();
-  }, [firebaseKey]);
+    getAllRoutineProducts();
+  }, [routProds]);
 
   return (
     <>
@@ -62,8 +68,8 @@ function ViewRoutine() {
         </div>
         <div>
           <h2>Your Routine Products</h2>
-          {routProds.map((routProd) => (
-            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getAllRoutineProducts} />
+          {matchedProducts.map((routProd) => (
+            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getRoutProds} />
           ))}
         </div>
       </div>
