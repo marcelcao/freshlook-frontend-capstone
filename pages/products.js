@@ -12,7 +12,6 @@ function Products() {
 
   const getAllProducts = () => {
     getProducts(user.uid).then(setProducts);
-    console.warn(getAllProducts);
   };
 
   useEffect(() => {
@@ -27,7 +26,7 @@ function Products() {
       </div>
       <div>
         {products.map((product) => (
-          <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} />
+          <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} pageContext="deleteProd" />
         ))}
       </div>
     </div>
