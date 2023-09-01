@@ -4,14 +4,24 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Form from 'react-bootstrap/Form';
+import { Button } from 'react-bootstrap';
 import { getSingleRoutine } from '../../../utils/data/routineData';
 import { getProducts } from '../../../utils/data/productData';
 import { useAuth } from '../../../utils/context/authContext';
+import { addProdToRoutine, updateRoutineProduct } from '../../../utils/data/mergedData';
+
+const initialPayloadState = {
+  productId: '',
+  routineId: '',
+};
 
 function AddProductsToRoutine() {
-  const router = useRouter();
   const [routDetails, setRoutDetails] = useState({});
   const [products, setProducts] = useState([]);
+  const [checkedProdIdValue, setCheckedProdIdValue] = useState({ availableProductIds: [], selectedProductId: [] });
+  const [payloadValues, setPayloadValues] = useState(initialPayloadState);
+
+  const router = useRouter();
   const { firebaseKey } = router.query;
   const { user } = useAuth();
 
@@ -23,10 +33,51 @@ function AddProductsToRoutine() {
     getProducts(user.uid).then(setProducts);
   };
 
+  const getPageRoutineId = () => {
+    routDetails.map((routDetail) => routDetail.routineId);
+  };
+
+  const getCheckedProductIds = checkedProdIdValue.setSelectedProductId;
+
   useEffect(() => {
     availableProducts();
     getRoutDetails();
   }, [firebaseKey]);
+
+  const handleChange = (e) => {
+    const { value, checked } = e.target;
+    const { availableProductIds } = checkedProdIdValue;
+
+    if (checked) {
+      setCheckedProdIdValue({
+        availableProductIds: [...availableProductIds, value],
+        selectedProductId: [...availableProductIds, value],
+      });
+    } else {
+      setCheckedProdIdValue({
+        availableProductIds: availableProductIds.filter(() => e !== value),
+        selectedProductId: availableProductIds.filter(() => e !== value),
+      });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const payload = { ...payloadValues, productId: { getCheckedProductIds }, routineId: { getPageRoutineId } };
+
+    addProdToRoutine(payload)
+      .then(setPayloadValues)
+      .then((result) => {
+        if (result && result.name) {
+          const patchPayload = { firebaseKey: result.name };
+
+          updateRoutineProduct(patchPayload).then(() => {
+            router.push(`/routine/${firebaseKey}`);
+          });
+        }
+      });
+  };
 
   return (
     <>
@@ -40,15 +91,17 @@ function AddProductsToRoutine() {
           </h2>
           <div>
             {products.map((item) => (
-              <Form.Group key={item.firebaseKey}>
-                <div>
-                  <Form.Check type="checkbox" label={item.prodName} value={item.prodName} />
+              <Form>
+                <Form.Group key={item.firebaseKey}>
                   <div>
-                    <img src={item.prodImg} alt={item.prodName} height="100rem" />
+                    <Form.Check type="checkbox" label={item.prodName} value={item.productId} onChange={handleChange} />
+                    <div>
+                      <img src={item.prodImg} alt={item.prodName} height="100rem" />
+                    </div>
                   </div>
-                </div>
-              </Form.Group>
-            ))}
+                </Form.Group>
+              </Form>
+            ))} <Button type="submit" onClick={handleSubmit}>ADD PRODUCTS TO ROUTINE</Button>
           </div>
         </div>
       </div>

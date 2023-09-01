@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getSingleRoutine } from '../../utils/data/routineData';
@@ -84,9 +83,3 @@ function ViewRoutine() {
 }
 
 export default ViewRoutine;
-
-ViewRoutine.propTypes = {
-  obj: PropTypes.shape({
-    firebaseKey: PropTypes.string,
-  }).isRequired,
-};
