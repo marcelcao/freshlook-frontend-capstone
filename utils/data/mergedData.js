@@ -64,22 +64,22 @@ const updateRoutineProduct = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// const getRoutineProducts = (routineId) => new Promise((resolve, reject) => {
-//   console.warn('routine id', routineId);
-//   getProdByRoutine(routineId)
-//     .then((product) => {
-//       getProdById(product.productId)
-//         .then((prodsArray) => {
-//           resolve([{ ...product, products: prodsArray }]);
-//           console.warn('prods array', prodsArray);
-//         });
-//     }).catch((error) => reject(error));
-// });
+const deleteRoutProd = (productId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/routineproducts/${productId}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 
 export {
   getProdByRoutine,
   getProdById,
   addProdToRoutine,
   updateRoutineProduct,
-  // getRoutineProducts,
+  deleteRoutProd,
 };

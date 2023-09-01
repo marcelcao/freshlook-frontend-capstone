@@ -4,14 +4,43 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { deleteSingleProduct } from '../utils/data/productData';
+import { deleteRoutProd } from '../utils/data/mergedData';
 
 // need to add link to edit button using modal //
 
-export default function ProductCard({ prodObj, onUpdate }) {
+export default function ProductCard({ prodObj, onUpdate, pageContext }) {
+  const reload = () => window.location.reload();
+
   const deleteThisProduct = () => {
     if (window.confirm('Delete this product?')) {
-      deleteSingleProduct(prodObj.productId).then(() => onUpdate());
+      deleteSingleProduct(prodObj.firebaseKey).then(() => onUpdate(reload));
     }
+  };
+
+  const deleteThisRoutProd = () => {
+    if (window.confirm('Delete this product?')) {
+      deleteRoutProd(prodObj.routineId).then(() => onUpdate(reload));
+    }
+  };
+
+  const renderDeleteBtns = () => {
+    if (pageContext === 'deleteProd') {
+      return (
+        <>
+          <Button onClick={deleteThisProduct} className="prod-delete">
+            DELETE
+          </Button>
+        </>
+      );
+    } if (pageContext === 'deleteRoutProd') {
+      return (
+        <>
+          <Button onClick={deleteThisRoutProd} className="prod-delete">
+            REMOVE
+          </Button>
+        </>
+      );
+    } return null;
   };
 
   return (
@@ -25,9 +54,7 @@ export default function ProductCard({ prodObj, onUpdate }) {
         <Link href={`/product/edit/${prodObj.productId}`} passHref>
           <Button variant="primary" className="m-2">EDIT</Button>
         </Link>
-        <Button onClick={deleteThisProduct} className="prod-delete">
-          DELETE
-        </Button>
+        {renderDeleteBtns()}
       </Card.Body>
     </Card>
   );
@@ -40,6 +67,8 @@ ProductCard.propTypes = {
     prodDescription: PropTypes.string,
     firebaseKey: PropTypes.string,
     productId: PropTypes.string,
+    routineId: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
+  pageContext: PropTypes.oneOf(['deleteProd', 'deleteRoutProd']).isRequired,
 };

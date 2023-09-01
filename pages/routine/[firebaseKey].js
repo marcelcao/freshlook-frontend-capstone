@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Button } from 'react-bootstrap';
 import { getSingleRoutine } from '../../utils/data/routineData';
 import { getProdByRoutine } from '../../utils/data/mergedData';
 import ProductCard from '../../components/ProductCard';
@@ -68,8 +70,11 @@ function ViewRoutine() {
         </div>
         <div>
           <h2>Your Routine Products</h2>
+          <Link href={`/routine/addProduct/${firebaseKey}`} passHref>
+            <Button variant="primary" className="m-2">ADD PRODUCTS</Button>
+          </Link>
           {matchedProducts.map((routProd) => (
-            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getRoutProds} />
+            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getRoutProds} pageContext="deleteRoutProd" />
           ))}
         </div>
       </div>
