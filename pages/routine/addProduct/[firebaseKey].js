@@ -52,7 +52,7 @@ function AddProductsToRoutine() {
       const newArray = [...prodIdArray];
       newArray.splice(productIndex, 1);
       setProdIdArray(newArray);
-    } console.warn(prodIdArray);
+    }
   };
 
   const handleSubmit = () => {
@@ -63,7 +63,9 @@ function AddProductsToRoutine() {
       };
       return addProdToRoutine(payload);
     });
-    Promise.all(promises);
+    Promise.all(promises).then(() => {
+      router.push(`/routine/${firebaseKey}`);
+    });
   };
 
   return (
