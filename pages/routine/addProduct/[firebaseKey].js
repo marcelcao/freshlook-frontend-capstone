@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable react/no-array-index-key */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -8,18 +7,20 @@ import { Button } from 'react-bootstrap';
 import { getSingleRoutine } from '../../../utils/data/routineData';
 import { getProducts } from '../../../utils/data/productData';
 import { useAuth } from '../../../utils/context/authContext';
-import { addProdToRoutine, updateRoutineProduct } from '../../../utils/data/mergedData';
+import { addProdToRoutine } from '../../../utils/data/mergedData';
 
-const initialPayloadState = {
-  productId: '',
-  routineId: '',
-};
+// const initialPayloadState = {
+//   firebaseKey: '',
+//   productId: '',
+//   routineId: '',
+// };
 
 function AddProductsToRoutine() {
   const [routDetails, setRoutDetails] = useState({});
   const [products, setProducts] = useState([]);
-  const [checkedProdIdValue, setCheckedProdIdValue] = useState({ availableProductIds: [], selectedProductId: [] });
-  const [payloadValues, setPayloadValues] = useState(initialPayloadState);
+  const [prodIdArray, setProdIdArray] = useState([]);
+  const [routineId, setRoutineId] = useState(null);
+  console.warn(routineId);
 
   const router = useRouter();
   const { firebaseKey } = router.query;
@@ -33,50 +34,36 @@ function AddProductsToRoutine() {
     getProducts(user.uid).then(setProducts);
   };
 
-  const getPageRoutineId = () => {
-    routDetails.map((routDetail) => routDetail.routineId);
-  };
-
-  const getCheckedProductIds = checkedProdIdValue.setSelectedProductId;
-
   useEffect(() => {
     availableProducts();
     getRoutDetails();
+    setRoutineId(firebaseKey);
   }, [firebaseKey]);
 
   const handleChange = (e) => {
     const { value, checked } = e.target;
-    const { availableProductIds } = checkedProdIdValue;
 
     if (checked) {
-      setCheckedProdIdValue({
-        availableProductIds: [...availableProductIds, value],
-        selectedProductId: [...availableProductIds, value],
-      });
+      if (!prodIdArray.includes(value)) {
+        setProdIdArray([...prodIdArray, value]);
+      }
     } else {
-      setCheckedProdIdValue({
-        availableProductIds: availableProductIds.filter(() => e !== value),
-        selectedProductId: availableProductIds.filter(() => e !== value),
-      });
-    }
+      const productIndex = prodIdArray.findIndex((productId) => productId === value);
+      const newArray = [...prodIdArray];
+      newArray.splice(productIndex, 1);
+      setProdIdArray(newArray);
+    } console.warn(prodIdArray);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const payload = { ...payloadValues, productId: { getCheckedProductIds }, routineId: { getPageRoutineId } };
-
-    addProdToRoutine(payload)
-      .then(setPayloadValues)
-      .then((result) => {
-        if (result && result.name) {
-          const patchPayload = { firebaseKey: result.name };
-
-          updateRoutineProduct(patchPayload).then(() => {
-            router.push(`/routine/${firebaseKey}`);
-          });
-        }
-      });
+  const handleSubmit = () => {
+    const promises = prodIdArray.map((prodId) => {
+      const payload = {
+        productId: prodId,
+        routineId,
+      };
+      return addProdToRoutine(payload);
+    });
+    Promise.all(promises);
   };
 
   return (
@@ -91,8 +78,8 @@ function AddProductsToRoutine() {
           </h2>
           <div>
             {products.map((item) => (
-              <Form>
-                <Form.Group key={item.firebaseKey}>
+              <Form key={item.firebaseKey}>
+                <Form.Group>
                   <div>
                     <Form.Check type="checkbox" label={item.prodName} value={item.productId} onChange={handleChange} />
                     <div>
@@ -101,7 +88,7 @@ function AddProductsToRoutine() {
                   </div>
                 </Form.Group>
               </Form>
-            ))} <Button type="submit" onClick={handleSubmit}>ADD PRODUCTS TO ROUTINE</Button>
+            ))}<Button onClick={handleSubmit}>Add Products</Button>
           </div>
         </div>
       </div>
