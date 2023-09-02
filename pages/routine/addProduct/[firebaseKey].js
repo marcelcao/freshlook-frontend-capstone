@@ -9,17 +9,18 @@ import { getProducts } from '../../../utils/data/productData';
 import { useAuth } from '../../../utils/context/authContext';
 import { addProdToRoutine } from '../../../utils/data/mergedData';
 
-const initialPayloadState = {
-  firebaseKey: '',
-  productId: '',
-  routineId: '',
-};
+// const initialPayloadState = {
+//   firebaseKey: '',
+//   productId: '',
+//   routineId: '',
+// };
 
 function AddProductsToRoutine() {
   const [routDetails, setRoutDetails] = useState({});
   const [products, setProducts] = useState([]);
-  const [checkedProdIdValue, setCheckedProdIdValue] = useState({ availableProductIds: [], selectedProductId: [] });
-  const [payloadValues, setPayloadValues] = useState(initialPayloadState);
+  const [prodIdArray, setProdIdArray] = useState([]);
+  const [routineId, setRoutineId] = useState(null);
+  console.warn(routineId);
 
   const router = useRouter();
   const { firebaseKey } = router.query;
@@ -33,39 +34,36 @@ function AddProductsToRoutine() {
     getProducts(user.uid).then(setProducts);
   };
 
-  // const getPageRoutineId = () => {
-  //   routDetails.map((routDetail) => routDetail.routineId);
-  // };
-
-  const getCheckedProductIds = checkedProdIdValue.selectedProductId;
-
   useEffect(() => {
     availableProducts();
     getRoutDetails();
+    setRoutineId(firebaseKey);
   }, [firebaseKey]);
 
   const handleChange = (e) => {
     const { value, checked } = e.target;
-    const { availableProductIds } = checkedProdIdValue;
 
     if (checked) {
-      setCheckedProdIdValue({
-        availableProductIds: [...availableProductIds, value],
-        selectedProductId: [...availableProductIds, value],
-      });
+      if (!prodIdArray.includes(value)) {
+        setProdIdArray([...prodIdArray, value]);
+      }
     } else {
-      setCheckedProdIdValue({
-        availableProductIds: availableProductIds.filter(() => e !== value),
-        selectedProductId: availableProductIds.filter(() => e !== value),
-      });
-    } const payload = { ...payloadValues, productId: getCheckedProductIds };
-
-    addProdToRoutine(payload)
-      .then(setPayloadValues);
+      const productIndex = prodIdArray.findIndex((productId) => productId === value);
+      const newArray = [...prodIdArray];
+      newArray.splice(productIndex, 1);
+      setProdIdArray(newArray);
+    } console.warn(prodIdArray);
   };
 
-  const routeBack = () => {
-    router.push(`/routine/${firebaseKey}`);
+  const handleSubmit = () => {
+    const promises = prodIdArray.map((prodId) => {
+      const payload = {
+        productId: prodId,
+        routineId,
+      };
+      return addProdToRoutine(payload);
+    });
+    Promise.all(promises);
   };
 
   return (
@@ -90,7 +88,7 @@ function AddProductsToRoutine() {
                   </div>
                 </Form.Group>
               </Form>
-            ))}<Button onClick={routeBack}>Add Products</Button>
+            ))}<Button onClick={handleSubmit}>Add Products</Button>
           </div>
         </div>
       </div>
