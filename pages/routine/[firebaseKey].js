@@ -54,7 +54,7 @@ function ViewRoutine() {
 
   const reload = () => window.location.reload();
   const deleteThisRoutProd = () => {
-    if (routProdKey && window.confirm('Remove this product from routine?')) {
+    if (window.confirm('Remove this product from routine?')) {
       deleteRoutProd(routProdKey.firebaseKey).then((reload));
       console.warn(routProdKey);
     }
