@@ -64,8 +64,20 @@ const updateRoutineProduct = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deleteRoutProd = (productId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/routineproducts/${productId}.json`, {
+const getSingleRoutProd = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/routineproducts/${firebaseKey}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const deleteRoutProd = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/routineproducts/${firebaseKey}.json`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -82,4 +94,5 @@ export {
   addProdToRoutine,
   updateRoutineProduct,
   deleteRoutProd,
+  getSingleRoutProd,
 };
