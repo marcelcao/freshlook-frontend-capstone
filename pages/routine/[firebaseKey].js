@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getSingleRoutine } from '../../utils/data/routineData';
-import { getProdByRoutine } from '../../utils/data/mergedData';
+import { getProdByRoutine, deleteRoutProd, getSingleRoutProd } from '../../utils/data/mergedData';
 import ProductCard from '../../components/ProductCard';
 import RoutineModal from '../../components/RoutineModal';
 import { getProducts } from '../../utils/data/productData';
@@ -13,8 +13,10 @@ import { useAuth } from '../../utils/context/authContext';
 function ViewRoutine() {
   const [routDetails, setRoutDetails] = useState({});
   const [routProds, setRoutProds] = useState([]);
+  const [routProdKey, setRoutProdKey] = useState(null);
   const [products, setProducts] = useState([]);
   const [matchedProducts, setMatchedProducts] = useState([]);
+
   const router = useRouter();
   const { user } = useAuth();
 
@@ -44,11 +46,26 @@ function ViewRoutine() {
       .then(setRoutProds);
   };
 
+  const getRoutProdKey = () => {
+    getSingleRoutProd(firebaseKey)
+      .then(setRoutProdKey);
+    console.warn(setRoutProdKey);
+  };
+
+  const reload = () => window.location.reload();
+  const deleteThisRoutProd = () => {
+    if (routProdKey && window.confirm('Remove this product from routine?')) {
+      deleteRoutProd(routProdKey.firebaseKey).then((reload));
+      console.warn(routProdKey);
+    }
+  };
+
   useEffect(() => {
     getProducts(user.uid).then(setProducts)
       .then(() => {
         getRoutDetails();
         getRoutProds();
+        getRoutProdKey();
       });
   }, [firebaseKey]);
 
@@ -74,7 +91,7 @@ function ViewRoutine() {
             <Button variant="primary" className="m-2">ADD PRODUCTS</Button>
           </Link>
           {matchedProducts.map((routProd) => (
-            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getRoutProds} pageContext="deleteRoutProd" />
+            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getRoutProds} onClick={deleteThisRoutProd} pageContext="deleteRoutProd" />
           ))}
         </div>
       </div>
