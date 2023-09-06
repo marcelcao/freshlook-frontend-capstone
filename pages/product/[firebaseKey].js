@@ -40,9 +40,3 @@ function ViewProduct() {
 }
 
 export default ViewProduct;
-
-// ViewProduct.propTypes = {
-//   prodObj: PropTypes.shape({
-//     firebaseKey: PropTypes.string,
-//   }).isRequired,
-// };

@@ -7,20 +7,13 @@ import { Button } from 'react-bootstrap';
 import { getSingleRoutine } from '../../../utils/data/routineData';
 import { getProducts } from '../../../utils/data/productData';
 import { useAuth } from '../../../utils/context/authContext';
-import { addProdToRoutine } from '../../../utils/data/mergedData';
-
-// const initialPayloadState = {
-//   firebaseKey: '',
-//   productId: '',
-//   routineId: '',
-// };
+import { addProdToRoutine, updateRoutineProduct } from '../../../utils/data/mergedData';
 
 function AddProductsToRoutine() {
   const [routDetails, setRoutDetails] = useState({});
   const [products, setProducts] = useState([]);
   const [prodIdArray, setProdIdArray] = useState([]);
   const [routineId, setRoutineId] = useState(null);
-  console.warn(routineId);
 
   const router = useRouter();
   const { firebaseKey } = router.query;
@@ -61,7 +54,11 @@ function AddProductsToRoutine() {
         productId: prodId,
         routineId,
       };
-      return addProdToRoutine(payload);
+      return addProdToRoutine(payload)
+        .then(({ name }) => {
+          const patchPayload = { firebaseKey: name };
+          updateRoutineProduct(patchPayload);
+        });
     });
     Promise.all(promises).then(() => {
       router.push(`/routine/${firebaseKey}`);
