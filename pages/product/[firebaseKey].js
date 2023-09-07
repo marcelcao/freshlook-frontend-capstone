@@ -6,19 +6,27 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getSingleProduct } from '../../utils/data/productData';
 import ProductModal from '../../components/ProductModal';
+import { viewProductType } from '../../utils/data/productType';
 
 function ViewProduct() {
   const [prodDetails, setProdDetails] = useState({});
+  const [prodTypeKey, setProdTypeKey] = useState({});
   const router = useRouter();
 
   const { firebaseKey } = router.query || {};
 
   const getProdDetails = () => {
-    getSingleProduct(firebaseKey).then(setProdDetails);
+    getSingleProduct(firebaseKey)
+      .then(setProdDetails);
+  };
+
+  const getProdTypeKey = () => {
+    viewProductType(firebaseKey).then(setProdTypeKey);
   };
 
   useEffect(() => {
     getProdDetails();
+    getProdTypeKey();
   }, [firebaseKey]);
 
   return (
@@ -28,6 +36,9 @@ function ViewProduct() {
           <img src={prodDetails.prodImg} alt="Product" width="200px" height="300px" className="view-prod-photo" />
           <h2>
             {prodDetails.prodName}
+          </h2>
+          <h2>
+            Product Type: {prodTypeKey.typeObj?.label}
           </h2>
           <h2>
             {prodDetails.prodDescription}

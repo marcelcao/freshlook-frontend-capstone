@@ -1,15 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { deleteSingleProduct } from '../utils/data/productData';
-// import { deleteRoutProd } from '../utils/data/mergedData';
-
-// need to add link to edit button using modal //
 
 export default function ProductCard({
-  prodObj, onUpdate, pageContext, onClick,
+  prodObj, onUpdate, pageContext,
 }) {
   const reload = () => window.location.reload();
 
@@ -31,7 +29,7 @@ export default function ProductCard({
     } if (pageContext === 'deleteRoutProd') {
       return (
         <>
-          <Button onClick={onClick} className="prod-delete">
+          <Button onClick={deleteThisProduct} className="prod-delete">
             REMOVE
           </Button>
         </>
@@ -66,6 +64,5 @@ ProductCard.propTypes = {
     routineId: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
   pageContext: PropTypes.oneOf(['deleteProd', 'deleteRoutProd']).isRequired,
 };
