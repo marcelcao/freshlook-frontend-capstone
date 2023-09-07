@@ -6,11 +6,13 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useAuth } from '../utils/context/authContext';
 import { createProduct, updateProduct } from '../utils/data/productData';
+import { getProductTypes } from '../utils/data/productType';
 
 const initialState = {
   prodName: '',
   prodDescription: '',
   prodImg: '',
+  prodType: '',
 };
 
 function ProductModal({ obj }) {
@@ -19,13 +21,14 @@ function ProductModal({ obj }) {
   const handleShow = () => setShow(true);
 
   const [formInput, setFormInput] = useState(initialState);
+  const [labels, setLabels] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (obj.firebaseKey) {
-      setFormInput(obj);
-    }
+    getProductTypes().then(setLabels);
+
+    if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
   const handleChange = (e) => {
@@ -87,6 +90,31 @@ function ProductModal({ obj }) {
               <Form.Control type="url" placeholder="Product Image URL Here" name="prodImg" value={formInput.prodImg} onChange={handleChange} required />
             </Form.Group>
 
+            <Form.Group>
+              <Form.Label controlId="floatingSelect" label="Product Type">
+                <Form.Select
+                  aria-label="Product Type"
+                  name="Product Type"
+                  onChange={handleChange}
+                  className="mb-3"
+                  value={obj.prodType}
+                  required
+                >
+                  <option value="">Select Product Type</option>
+                  {
+                    labels.map((label) => (
+                      <option
+                        key={label.firebaseKey}
+                        value={label.firebaseKey}
+                      >
+                        {label.label}
+                      </option>
+                    ))
+                  }
+                </Form.Select>
+              </Form.Label>
+            </Form.Group>
+
             <Button type="submit" className="submit-btn" onClick={handleSubmit}>{obj.firebaseKey ? 'Update' : 'Add'} Product</Button>
           </Form>
         </Modal.Body>
@@ -101,6 +129,7 @@ ProductModal.propTypes = {
     prodDescription: PropTypes.string,
     prodImg: PropTypes.string,
     firebaseKey: PropTypes.string,
+    prodType: PropTypes.string,
   }),
 };
 ProductModal.defaultProps = {
