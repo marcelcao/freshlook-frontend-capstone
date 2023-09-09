@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { deleteSingleProduct } from '../utils/data/productData';
+import { deleteRoutProd } from '../utils/data/mergedData';
 
 export default function ProductCard({
   prodObj, onUpdate, pageContext,
@@ -14,6 +15,12 @@ export default function ProductCard({
   const deleteThisProduct = () => {
     if (window.confirm('Delete this product?')) {
       deleteSingleProduct(prodObj.firebaseKey).then(() => onUpdate(reload));
+    }
+  };
+
+  const deleteThisRoutProd = () => {
+    if (window.confirm('Delete this product?')) {
+      deleteRoutProd(prodObj.routProdKey).then(() => onUpdate(reload));
     }
   };
 
@@ -29,7 +36,7 @@ export default function ProductCard({
     } if (pageContext === 'deleteRoutProd') {
       return (
         <>
-          <Button onClick={deleteThisProduct} className="prod-delete">
+          <Button onClick={deleteThisRoutProd} className="prod-delete">
             REMOVE
           </Button>
         </>
@@ -62,6 +69,7 @@ ProductCard.propTypes = {
     firebaseKey: PropTypes.string,
     productId: PropTypes.string,
     routineId: PropTypes.string,
+    routProdKey: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
   pageContext: PropTypes.oneOf(['deleteProd', 'deleteRoutProd']).isRequired,

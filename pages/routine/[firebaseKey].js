@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getSingleRoutine } from '../../utils/data/routineData';
-import { getProdByRoutine, deleteRoutProd, getSingleRoutProd } from '../../utils/data/mergedData';
+import { getProdByRoutine } from '../../utils/data/mergedData';
 import ProductCard from '../../components/ProductCard';
 import RoutineModal from '../../components/RoutineModal';
 import { getProducts } from '../../utils/data/productData';
@@ -13,7 +13,6 @@ import { useAuth } from '../../utils/context/authContext';
 function ViewRoutine() {
   const [routDetails, setRoutDetails] = useState({});
   const [routProds, setRoutProds] = useState([]);
-  const [routProdKey, setRoutProdKey] = useState(null);
   const [products, setProducts] = useState([]);
   const [matchedProducts, setMatchedProducts] = useState([]);
 
@@ -27,14 +26,16 @@ function ViewRoutine() {
   };
 
   const getAllRoutineProducts = () => {
-    const routProdsById = routProds.map((routProd) => routProd.productId);
+    // need to also return the firebasekey along with the productId //
+    // before line 39, before pushing you want to add the routprod firebase key to userprod //
 
     const matched = [];
 
     products.forEach((userProd) => {
-      routProdsById.forEach((routProd) => {
-        if (userProd.productId === routProd) {
-          matched.push(userProd);
+      routProds.forEach((routProd) => {
+        if (userProd.productId === routProd.productId) {
+          const updatedProd = { ...userProd, routProdKey: routProd.firebaseKey };
+          matched.push(updatedProd);
         }
       });
     });
@@ -46,26 +47,11 @@ function ViewRoutine() {
       .then(setRoutProds);
   };
 
-  const getRoutProdKey = () => {
-    getSingleRoutProd(firebaseKey)
-      .then(setRoutProdKey);
-    console.warn(setRoutProdKey);
-  };
-
-  const reload = () => window.location.reload();
-  const deleteThisRoutProd = () => {
-    if (window.confirm('Remove this product from routine?')) {
-      deleteRoutProd(routProdKey.firebaseKey).then((reload));
-      console.warn(routProdKey);
-    }
-  };
-
   useEffect(() => {
     getProducts(user.uid).then(setProducts)
       .then(() => {
         getRoutDetails();
         getRoutProds();
-        getRoutProdKey();
       });
   }, [firebaseKey]);
 
@@ -91,7 +77,7 @@ function ViewRoutine() {
             <Button variant="primary" className="m-2">ADD PRODUCTS</Button>
           </Link>
           {matchedProducts.map((routProd) => (
-            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getRoutProds} onClick={deleteThisRoutProd} pageContext="deleteRoutProd" />
+            <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getRoutProds} pageContext="deleteRoutProd" />
           ))}
         </div>
       </div>

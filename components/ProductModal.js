@@ -94,10 +94,10 @@ function ProductModal({ obj }) {
               <Form.Label controlId="floatingSelect" label="Product Type">
                 <Form.Select
                   aria-label="Product Type"
-                  name="Product Type"
+                  name="prodType"
                   onChange={handleChange}
                   className="mb-3"
-                  value={obj.prodType}
+                  value={formInput.prodType}
                   required
                 >
                   <option value="">Select Product Type</option>
