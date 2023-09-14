@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { signIn } from '../utils/auth';
+import Footer from './Footer';
 
 function Signin() {
   return (
@@ -34,9 +35,7 @@ function Signin() {
             </div>
           </div>
         </div>
-        <footer>
-          View on Github | © 2023 freshlook by marcelcao
-        </footer>
+        <Footer />
       </div>
     </>
   );

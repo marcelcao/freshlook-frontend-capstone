@@ -12,7 +12,7 @@ export default function SearchBar({ onKeyUp }) {
       <Form className="search">
         <div className="search-box">
           <input
-            className="form-control"
+            className="search-input"
             id="search"
             name="search"
             placeholder="search"

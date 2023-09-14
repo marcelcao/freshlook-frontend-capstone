@@ -49,6 +49,7 @@ export default function ProductCard({
       <Card.Img variant="top" src={prodObj.prodImg} alt={prodObj.productId} style={{ height: '8em' }} className="product-img" />
       <Card.Body>
         <Card.Title>{prodObj.prodName} </Card.Title>
+        <Card.Title>{prodObj.prodType} </Card.Title>
         <Link href={`/product/${prodObj.productId}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
         </Link>
@@ -70,6 +71,7 @@ ProductCard.propTypes = {
     productId: PropTypes.string,
     routineId: PropTypes.string,
     routProdKey: PropTypes.string,
+    prodType: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
   pageContext: PropTypes.oneOf(['deleteProd', 'deleteRoutProd']).isRequired,

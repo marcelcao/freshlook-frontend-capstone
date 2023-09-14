@@ -4,8 +4,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
 }
 
 a {
@@ -17,40 +17,37 @@ a {
   box-sizing: border-box;
 }
 
-body {
-  background-color: #FBF4E0;
-}
-
 .sign-in-contain {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 3rem;
+  height: 100vh;
+  background-color: #FBF4E0;
 }
 
 .sign-in-content {
   text-align: right;
   margin-left: 10rem;
   margin-right: 5rem;
+  margin-top: 3rem;
 }
 
 .copy-items {
-  max-width: 18rem;
+  max-width: 50rem;
   text-align: center;
-  margin-left: 8rem;
   background-color: #ffffff;
   padding: 1rem;
-  -webkit-border-radius: 28px;
-  border-radius: 28px;
-  background: #ffffff;
-  -webkit-box-shadow: 7px 7px 0px #bfbfbf, -7px -7px 0px #ffffff;
-  box-shadow: 7px 7px 0px #bfbfbf, -7px -7px 0px #ffffff;
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .copy {
   margin-top: 5rem;
   color: #8C9887;
+  width: 50%;
+  text-align: center;
+  margin-left: 25%;
 }
 
 .logo-contain {
@@ -58,23 +55,87 @@ body {
   color: #6C925C;
 }
 
-.sign-in-btn {
+.sign-in-btn, .m-2, .routine-delete, .rout-modal {
   background-color: #6C925C;
   color: white;
   text-align: center;
-  border-radius: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
   border-color: #6C925C;
 }
 
-.sign-in-btn:hover {
+.sign-in-btn:hover, .m-2:hover {
   background-color: #8C9887;
 }
 
 footer {
-  text-align: center;
-  color: #8B8F89;
-  margin-top: 1rem;
+  text-align: right;
+  color: #636562;
+  position: fixed;
+  bottom: 0;
+  right: 5rem;
   margin-bottom: 2rem;
+}
+
+.github-footer:hover {
+  color:#6C925C;
+}
+
+.index-contain {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.index-items {
+  width: 80%;
+  margin-right: 2%;
+}
+
+.routine-card {
+  width: 100%;
+  margin-top: 2rem;
+  background-color: #FBF4E0;
+  color: #636562;
+}
+
+.routine-cards-contain {
+  margin-top: 2rem;
+}
+
+.routcard-contain {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.user-welcome {
+  font-family: Cambria, serif;
+  color: #6C925C;
+  font-size: 4rem;
+  margin-top: 8rem;
+}
+
+.sidebar-contain {
+  height: 100vh;
+  background-color: #FBF4E0;
+  width: 15%;
+}
+
+.search-input {
+  border-color: #6C925C;
+  border-radius: .5rem;
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.index-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.rout-modal {
+  height: 3rem;
+  margin-top: 8.5rem;
 }
