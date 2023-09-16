@@ -5,7 +5,6 @@ import { useAuth } from '../utils/context/authContext';
 import RoutineCard from '../components/RoutineCard';
 import RoutineModal from '../components/RoutineModal';
 import SearchBar from '../components/SearchBar';
-// import Sidebar from '../components/Sidebar';
 
 function Home() {
   const [routines, setRoutines] = useState([]);
@@ -35,7 +34,7 @@ function Home() {
         <div className="index-items">
           <div>
             <div className="index-head">
-              <h1 className="user-welcome">Welcome back, {user.displayName}</h1>
+              <h1 className="user-welcome">Your Routines</h1>
               <RoutineModal />
             </div>
             <div className="search-rout">

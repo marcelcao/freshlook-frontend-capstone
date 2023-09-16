@@ -28,8 +28,8 @@ export default function ProductCard({
     if (pageContext === 'deleteProd') {
       return (
         <>
-          <Button onClick={deleteThisProduct} className="prod-delete">
-            DELETE
+          <Button onClick={deleteThisProduct} className="prod-btns">
+            D
           </Button>
         </>
       );
@@ -45,18 +45,19 @@ export default function ProductCard({
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }} className="product-card">
-      <Card.Img variant="top" src={prodObj.prodImg} alt={prodObj.productId} style={{ height: '8em' }} className="product-img" />
-      <Card.Body>
-        <Card.Title>{prodObj.prodName} </Card.Title>
-        <Card.Title>{prodObj.prodType} </Card.Title>
-        <Link href={`/product/${prodObj.productId}`} passHref>
-          <Button className="m-2">VIEW</Button>
-        </Link>
-        <Link href={`/product/edit/${prodObj.productId}`} passHref>
-          <Button className="m-2">EDIT</Button>
-        </Link>
-        {renderDeleteBtns()}
+    <Card style={{ width: '15rem', height: '22rem', margin: '1rem' }} className="product-card">
+      <Card.Img variant="top" src={prodObj.prodImg} alt={prodObj.productId} style={{ height: '20em' }} className="product-img" />
+      <Card.Body className="product-card-body">
+        <Card.Title className="product-card-title">{prodObj.prodName} </Card.Title>
+        <div className="prod-btn-container">
+          <Link href={`/product/${prodObj.productId}`} passHref>
+            <Button className="prod-btns">V</Button>
+          </Link>
+          <Link href={`/product/edit/${prodObj.productId}`} passHref>
+            <Button className="prod-btns">E</Button>
+          </Link>
+          {renderDeleteBtns()}
+        </div>
       </Card.Body>
     </Card>
   );
@@ -71,7 +72,6 @@ ProductCard.propTypes = {
     productId: PropTypes.string,
     routineId: PropTypes.string,
     routProdKey: PropTypes.string,
-    prodType: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
   pageContext: PropTypes.oneOf(['deleteProd', 'deleteRoutProd']).isRequired,

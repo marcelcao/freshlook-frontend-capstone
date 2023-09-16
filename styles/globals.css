@@ -61,14 +61,14 @@ a {
   color: #6C925C;
 }
 
-.sign-in-btn, .m-2, .routine-delete, .rout-modal, .sign-out-btn, .submit-btn {
+.sign-in-btn, .m-2, .routine-delete, .rout-modal, .sign-out-btn, .submit-btn, .prod-modal {
   background-color: #6C925C;
   color: white;
   text-align: center;
   border-color: #6C925C;
 }
 
-.sign-in-btn:hover, .m-2:hover, .routine-delete:hover, .rout-modal:hover, .sign-out-btn:hover {
+.sign-in-btn:hover, .m-2:hover, .routine-delete:hover, .rout-modal:hover, .sign-out-btn:hover, .prod-modal:hover {
   background-color: #8C9887;
 }
 
@@ -92,12 +92,26 @@ a {
   color:#6C925C;
 }
 
-.index-contain {
+.index-contain, .product-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  margin-left: 2rem;
+  margin-left: 23rem;
+}
+
+.prods {
+  width: 100%;
+  margin-right: 2%;
+}
+
+.prodcard-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .index-items {
@@ -122,15 +136,20 @@ a {
   justify-content: space-between;
 }
 
-.user-welcome {
+.user-welcome, .prods-title {
   font-family: Cambria, serif;
   color: #6C925C;
   font-size: 4rem;
   margin-top: 8rem;
 }
 
+#sidebar-contain {
+  background-color: #FBF4E0;
+}
+
 .side-links {
   height: 100vh;
+  position: fixed;
   background-color: #FBF4E0;
   text-align: center;
   width: 20rem;
@@ -166,13 +185,13 @@ a {
   margin-top: 3rem;
 }
 
-.index-head {
+.index-head, .prods-head {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.rout-modal {
+.rout-modal, .prod-modal {
   height: 2.5rem;
   margin-top: 8rem;
 }
@@ -220,4 +239,23 @@ a {
   text-align: right;
   margin-top: 2rem;
   margin-bottom: 1rem;
+}
+
+.product-card {
+  background-color: #FBF4E0;
+  color: #636562;
+}
+
+.product-card-title {
+  font-size: 1rem;
+}
+
+.prod-btn-container {
+  text-align: right;
+}
+
+.prod-btns {
+  font-size: .5rem;
+  margin-left: .25rem;
+  background-color: #6C925C;
 }

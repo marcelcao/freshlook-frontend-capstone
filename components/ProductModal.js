@@ -65,7 +65,7 @@ function ProductModal({ obj }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button onClick={handleShow} className="prod-modal">
         <p className="form-label">{obj.firebaseKey ? 'Update' : 'Add'} Product</p>
       </Button>
 
