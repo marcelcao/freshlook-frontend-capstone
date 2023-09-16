@@ -51,10 +51,10 @@ export default function ProductCard({
         <Card.Title>{prodObj.prodName} </Card.Title>
         <Card.Title>{prodObj.prodType} </Card.Title>
         <Link href={`/product/${prodObj.productId}`} passHref>
-          <Button variant="primary" className="m-2">VIEW</Button>
+          <Button className="m-2">VIEW</Button>
         </Link>
         <Link href={`/product/edit/${prodObj.productId}`} passHref>
-          <Button variant="primary" className="m-2">EDIT</Button>
+          <Button className="m-2">EDIT</Button>
         </Link>
         {renderDeleteBtns()}
       </Card.Body>

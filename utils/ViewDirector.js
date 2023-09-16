@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useAuth } from './context/authContext';
 import Loading from '../components/Loading';
 import Signin from '../components/Signin';
-// import NavBarAuth from '../components/NavBarAuth';
+import Sidebar from '../components/Sidebar';
 
 const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) => {
   const { user, userLoading } = useAuth();
@@ -14,7 +14,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
   if (user) {
     return (
       <>
-        {/* <NavBarAuth /> */}
+        <Sidebar />
         <Component {...pageProps} />
       </>
     );

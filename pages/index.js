@@ -5,6 +5,7 @@ import { useAuth } from '../utils/context/authContext';
 import RoutineCard from '../components/RoutineCard';
 import RoutineModal from '../components/RoutineModal';
 import SearchBar from '../components/SearchBar';
+// import Sidebar from '../components/Sidebar';
 
 function Home() {
   const [routines, setRoutines] = useState([]);
@@ -31,9 +32,6 @@ function Home() {
   return (
     <>
       <div className="index-contain">
-        <div className="sidebar-contain">
-          sidebar here
-        </div>
         <div className="index-items">
           <div>
             <div className="index-head">

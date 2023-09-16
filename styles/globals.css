@@ -17,6 +17,11 @@ a {
   box-sizing: border-box;
 }
 
+#__next {
+  display: flex;
+  flex-direction: row;
+}
+
 .sign-in-contain {
   display: flex;
   flex-direction: row;
@@ -27,9 +32,10 @@ a {
 
 .sign-in-content {
   text-align: right;
-  margin-left: 10rem;
-  margin-right: 5rem;
-  margin-top: 3rem;
+  padding-top: 5rem;
+  padding-right: 5rem;
+  background-color: #FBF4E0;
+  width: 100%;
 }
 
 .copy-items {
@@ -85,10 +91,12 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
+  margin-left: 2rem;
 }
 
 .index-items {
-  width: 80%;
+  width: 100%;
   margin-right: 2%;
 }
 
@@ -116,10 +124,23 @@ footer {
   margin-top: 8rem;
 }
 
-.sidebar-contain {
+
+.side-links {
   height: 100vh;
   background-color: #FBF4E0;
-  width: 15%;
+  text-align: center;
+  width: 20rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.page-links {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
 }
 
 .search-input {
@@ -136,6 +157,11 @@ footer {
 }
 
 .rout-modal {
-  height: 3rem;
-  margin-top: 8.5rem;
+  height: 2.5rem;
+  margin-top: 8rem;
+}
+
+.side-links {
+  display: flex;
+  flex-direction: column;
 }
