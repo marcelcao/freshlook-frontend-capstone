@@ -1,9 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
+import { useAuth } from '../utils/context/authContext';
+import Footer from './Footer';
 
 export default function Sidebar() {
+  const { user } = useAuth();
+
   return (
     <>
       <div id="sidebar-contain">
@@ -12,17 +17,23 @@ export default function Sidebar() {
             <div>
               <h1>freshlook</h1>
             </div>
-            <di className="page-links">
+            <div className="page-links">
               <Link passHref href="/">
-                Routines
+                <p className="nav-link">Routines</p>
               </Link>
-              <Link passHref href="/products">
-                Products
+              <Link passHref href="/products" className="nav-link">
+                <p className="nav-link">Products</p>
               </Link>
-            </di>
+            </div>
           </div>
           <div>
-            <Button variant="danger" onClick={signOut}>Sign Out</Button>
+            <div id="user-profile">
+              <Link passHref href="/user">
+                <img src={user.photoURL} alt="user" className="nav-photo" />
+              </Link>
+            </div>
+            <Button className="sign-out-btn" onClick={signOut}>Sign Out</Button>
+            <Footer className="sidebar-footer" />
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@ function Signin() {
           <p>transform your skin</p>
           <p>one step at a time</p>
         </div>
-        <Footer />
+        <Footer className="sign-in-footer" />
       </div>
     </>
   );

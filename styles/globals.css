@@ -61,26 +61,31 @@ a {
   color: #6C925C;
 }
 
-.sign-in-btn, .m-2, .routine-delete, .rout-modal {
+.sign-in-btn, .m-2, .routine-delete, .rout-modal, .sign-out-btn, .submit-btn {
   background-color: #6C925C;
   color: white;
   text-align: center;
-  margin-left: 1rem;
-  margin-right: 1rem;
   border-color: #6C925C;
 }
 
-.sign-in-btn:hover, .m-2:hover {
+.sign-in-btn:hover, .m-2:hover, .routine-delete:hover, .rout-modal:hover, .sign-out-btn:hover {
   background-color: #8C9887;
 }
 
-footer {
+.sign-in-footer {
   text-align: right;
   color: #636562;
   position: fixed;
   bottom: 0;
   right: 5rem;
   margin-bottom: 2rem;
+}
+
+.sidebar-footer {
+  color: #636562;
+  margin-top: 2rem;
+  font-size: small;
+  text-align: center;
 }
 
 .github-footer:hover {
@@ -124,7 +129,6 @@ footer {
   margin-top: 8rem;
 }
 
-
 .side-links {
   height: 100vh;
   background-color: #FBF4E0;
@@ -135,12 +139,24 @@ footer {
   flex-direction: column;
   padding-top: 5rem;
   padding-bottom: 5rem;
+  font-size: 2rem;
+  color: #6C925C;
+}
+
+.nav-link {
+  color: #a7a7a7;
+}
+
+.nav-link:hover {
+  color:#6C925C;
+  cursor: pointer;
 }
 
 .page-links {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
+  margin-top: 5rem;
 }
 
 .search-input {
@@ -164,4 +180,44 @@ footer {
 .side-links {
   display: flex;
   flex-direction: column;
+}
+
+.nav-photo {
+  height: 7rem;
+  width: 7rem;
+  border-radius: 10rem;
+  border-width: .2px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+#modal-head {
+  background-color: #FBF4E0;
+  color: #6C925C;
+  font-family: Cambria, serif;
+  font-size: larger;
+}
+
+#modal-body {
+  background-color: #FBF4E0;
+  color: #636562;
+}
+
+.form-placeholder {
+  background-color: #e3e3e3;
+}
+
+.form-dropdown {
+  background-color: #e3e3e3;
+  color: #636562;
+}
+
+.form-label {
+  font-size: larger;
+}
+
+.modal-submit {
+  text-align: right;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }

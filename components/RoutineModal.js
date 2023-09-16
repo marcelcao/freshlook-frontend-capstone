@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -19,7 +19,7 @@ function RoutineModal({ obj }) {
 
   const [formInput, setFormInput] = useState(initialState);
   const { user } = useAuth();
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     if (obj.firebaseKey) {
@@ -36,11 +36,12 @@ function RoutineModal({ obj }) {
   };
 
   const handleSubmit = (e) => {
+    const reload = () => window.location.reload();
     e.preventDefault();
     if (obj.firebaseKey) {
       updateRoutine(formInput).then(() => {
         handleClose();
-        router.push('/');
+        reload();
       });
     } else {
       const payload = { ...formInput, uid: user.uid };
@@ -49,13 +50,11 @@ function RoutineModal({ obj }) {
 
         updateRoutine(patchPayload).then(() => {
           handleClose();
-          router.push('/');
+          reload();
         });
       });
     }
   };
-
-  const reload = () => window.location.reload();
 
   return (
     <>
@@ -63,22 +62,24 @@ function RoutineModal({ obj }) {
         <p className="form-label">{obj.firebaseKey ? 'Update' : 'Create'} Routine</p>
       </Button>
 
-      <Modal show={show} onHide={handleClose} onExit={reload}>
-        <Modal.Header closeButton>
-          <h2 className="form-label">{obj.firebaseKey ? 'Update' : 'Create'} Routine</h2>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton id="modal-head">
+          <h2 className="form-head">{obj.firebaseKey ? 'Update' : 'Create'} Routine</h2>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body id="modal-body">
           <Form onSubmit={handleClose}>
             <Form.Group className="mb-3" controlId="formRoutineName">
-              <Form.Label>Routine Name</Form.Label>
-              <Form.Control type="text" placeholder="Routine Name Here" name="routineName" value={formInput.routineName} onChange={handleChange} required />
+              <Form.Label className="form-label">Routine Name</Form.Label>
+              <Form.Control className="form-placeholder" type="text" placeholder="Routine Name Here" name="routineName" value={formInput.routineName} onChange={handleChange} required />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formRoutineDescription">
               <Form.Label>Routine Description</Form.Label>
-              <Form.Control type="text" placeholder="Routine Description Here" name="routineDescription" value={formInput.routineDescription} onChange={handleChange} required />
+              <Form.Control className="form-placeholder" type="text" placeholder="Routine Description Here" name="routineDescription" value={formInput.routineDescription} onChange={handleChange} required />
             </Form.Group>
-            <Button type="submit" className="submit-btn" onClick={handleSubmit}>{obj.firebaseKey ? 'Update' : 'Create'} Routine</Button>
+            <div className="modal-submit">
+              <Button type="submit" className="submit-btn" onClick={handleSubmit}>{obj.firebaseKey ? 'Update' : 'Create'} Routine</Button>
+            </div>
           </Form>
         </Modal.Body>
       </Modal>
