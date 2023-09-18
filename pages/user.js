@@ -7,11 +7,19 @@ export default function UserProfile() {
 
   return (
     <div className="user-page">
-      <img src={user.photoURL} alt="user" width="100px" height="100px" className="user-display-photo" />
+      <div className="profile-photo-page">
+        <img src={user.photoURL} alt="user" width="200rem" height="200rem" className="user-display-photo" />
+      </div>
       <div className="infos">
-        <h1 className="user-info">username: {user.displayName}</h1>
-        <h2 className="user-info">user e-mail: {user.email}</h2>
-        <h2 className="user-info">last login: {user.metadata.lastSignInTime}</h2>
+        <div className="info-category">
+          <p className="user-info">username: </p><p>{user.displayName}</p>
+        </div>
+        <div className="info-category">
+          <p className="user-info">user e-mail:</p><p>{user.email}</p>
+        </div>
+        <div className="info-category">
+          <p className="user-info">last login:</p><p>{user.metadata.lastSignInTime}</p>
+        </div>
       </div>
     </div>
   );

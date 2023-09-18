@@ -31,18 +31,20 @@ function ViewProduct() {
 
   return (
     <>
-      <div className="mt-5 d-flex flex-wrap">
-        <div className="text-white ms-5 details">
+      <div className="single-prod-container">
+        <div className="single-prod-item">
           <img src={prodDetails.prodImg} alt="Product" width="200px" height="300px" className="view-prod-photo" />
           <h2>
             {prodDetails.prodName}
           </h2>
           <h2>
-            Product Type: {prodTypeKey.typeObj?.label}
+            Product Type:
           </h2>
+          {prodTypeKey.typeObj?.label}
           <h2>
-            {prodDetails.prodDescription}
+            Description:
           </h2>
+          {prodDetails.prodDescription}
         </div>
       </div>
       <ProductModal obj={prodDetails} key={firebaseKey} />
