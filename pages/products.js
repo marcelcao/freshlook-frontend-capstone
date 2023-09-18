@@ -29,16 +29,18 @@ function Products() {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Your Products</h1>
-        <ProductModal />
+    <div className="product-container">
+      <div className="prods">
+        <div className="prods-head">
+          <h1 className="prods-title">Your Products</h1>
+          <ProductModal />
+        </div>
         <SearchBar onKeyUp={(query) => filterResult(query)} />
-      </div>
-      <div>
-        {products.map((product) => (
-          <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} pageContext="deleteProd" />
-        ))}
+        <div className="prodcard-container">
+          {products.map((product) => (
+            <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} pageContext="deleteProd" />
+          ))}
+        </div>
       </div>
     </div>
   );

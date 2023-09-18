@@ -65,38 +65,38 @@ function ProductModal({ obj }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button onClick={handleShow} className="prod-modal">
         <p className="form-label">{obj.firebaseKey ? 'Update' : 'Add'} Product</p>
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <h2 className="form-label">{obj.firebaseKey ? 'Update' : 'Add'} Product</h2>
+        <Modal.Header closeButton id="modal-head">
+          <h2 className="form-head">{obj.firebaseKey ? 'Update' : 'Add'} Product</h2>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body id="modal-body">
           <Form onSubmit={handleClose}>
             <Form.Group className="mb-3" controlId="formProductName">
               <Form.Label>Product Name</Form.Label>
-              <Form.Control type="text" placeholder="Product Name Here" name="prodName" value={formInput.prodName} onChange={handleChange} required />
+              <Form.Control className="form-placeholder" type="text" placeholder="Product Name Here" name="prodName" value={formInput.prodName} onChange={handleChange} required />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formProductDescription">
               <Form.Label>Product Description</Form.Label>
-              <Form.Control type="text" placeholder="Product Description Here" name="prodDescription" value={formInput.prodDescription} onChange={handleChange} required />
+              <Form.Control className="form-placeholder" type="text" placeholder="Product Description Here" name="prodDescription" value={formInput.prodDescription} onChange={handleChange} required />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formProductImg">
               <Form.Label>Product Image</Form.Label>
-              <Form.Control type="url" placeholder="Product Image URL Here" name="prodImg" value={formInput.prodImg} onChange={handleChange} required />
+              <Form.Control className="form-placeholder" type="url" placeholder="Product Image URL Here" name="prodImg" value={formInput.prodImg} onChange={handleChange} required />
             </Form.Group>
 
             <Form.Group>
-              <Form.Label controlId="floatingSelect" label="Product Type">
+              <Form.Label controlId="floatingSelect" label="Product Type">Product Type
                 <Form.Select
+                  className="form-dropdown"
                   aria-label="Product Type"
                   name="prodType"
                   onChange={handleChange}
-                  className="mb-3"
                   value={formInput.prodType}
                   required
                 >
@@ -114,8 +114,9 @@ function ProductModal({ obj }) {
                 </Form.Select>
               </Form.Label>
             </Form.Group>
-
-            <Button type="submit" className="submit-btn" onClick={handleSubmit}>{obj.firebaseKey ? 'Update' : 'Add'} Product</Button>
+            <div className="modal-submit">
+              <Button type="submit" className="submit-btn" onClick={handleSubmit}>{obj.firebaseKey ? 'Update' : 'Add'} Product</Button>
+            </div>
           </Form>
         </Modal.Body>
       </Modal>

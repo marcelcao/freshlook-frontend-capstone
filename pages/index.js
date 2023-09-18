@@ -29,18 +29,26 @@ function Home() {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Welcome back, {user.displayName}</h1>
-        <RoutineModal />
-        <SearchBar onKeyUp={(query) => filterResult(query)} />
+    <>
+      <div className="index-contain">
+        <div className="index-items">
+          <div>
+            <div className="index-head">
+              <h1 className="user-welcome">Your Routines</h1>
+              <RoutineModal />
+            </div>
+            <div className="search-rout">
+              <SearchBar onKeyUp={(query) => filterResult(query)} />
+            </div>
+          </div>
+          <div className="routine-cards-contain">
+            {routines.map((routine) => (
+              <RoutineCard key={routine.firebaseKey} routineObj={routine} onUpdate={getAllRoutines} />
+            ))}
+          </div>
+        </div>
       </div>
-      <div>
-        {routines.map((routine) => (
-          <RoutineCard key={routine.firebaseKey} routineObj={routine} onUpdate={getAllRoutines} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
 

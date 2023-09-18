@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -15,18 +16,22 @@ export default function RoutineCard({ routineObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }} className="routine-card">
+    <Card className="routine-card">
       <Card.Body>
-        <Card.Title>{routineObj.routineName} </Card.Title>
-        <Link href={`/routine/${routineObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">VIEW</Button>
-        </Link>
-        <Link href={`/routine/${routineObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">EDIT</Button>
-        </Link>
-        <Button onClick={deleteThisRoutine} className="routine-delete">
-          DELETE
-        </Button>
+        <div className="routcard-contain">
+          <Card.Title>{routineObj.routineName} </Card.Title>
+          <div className="routcard-btns">
+            <Link href={`/routine/${routineObj.firebaseKey}`} passHref>
+              <Button variant="primary" className="m-2">VIEW</Button>
+            </Link>
+            <Link href={`/routine/${routineObj.firebaseKey}`} passHref>
+              <Button variant="primary" className="m-2">EDIT</Button>
+            </Link>
+            <Button onClick={deleteThisRoutine} className="routine-delete">
+              <img src="/icons/deleteicon.png" alt="delete button" className="delete-icon" />
+            </Button>
+          </div>
+        </div>
       </Card.Body>
     </Card>
   );
