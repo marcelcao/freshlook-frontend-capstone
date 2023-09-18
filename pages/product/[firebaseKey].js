@@ -46,8 +46,8 @@ function ViewProduct() {
           </h2>
           {prodDetails.prodDescription}
         </div>
+        <ProductModal obj={prodDetails} key={firebaseKey} />
       </div>
-      <ProductModal obj={prodDetails} key={firebaseKey} />
     </>
   );
 }

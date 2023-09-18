@@ -100,7 +100,7 @@ a {
   margin-left: 23rem;
 }
 
-.user-page {
+.user-page, .single-prod-container {
   display: flex;
   flex-direction: column;
   width: 100%;
