@@ -43,8 +43,24 @@ const viewProductType = (firebaseKey) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const sortCleanser = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/products.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const cleansers = Object.values(data).filter((obj) => obj.prodType === '-NdcCch-21q60DQkS0ng');
+      resolve(cleansers);
+    })
+    .catch(reject);
+});
+
 export {
   getProductTypes,
   getSingleProductType,
   viewProductType,
+  sortCleanser,
 };

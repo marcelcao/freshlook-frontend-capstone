@@ -5,6 +5,7 @@ import { useAuth } from '../utils/context/authContext';
 import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
 import SearchBar from '../components/SearchBar';
+import Filter from '../components/Filter';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -36,6 +37,7 @@ function Products() {
           <ProductModal />
         </div>
         <SearchBar onKeyUp={(query) => filterResult(query)} />
+        <Filter />
         <div className="prodcard-container">
           {products.map((product) => (
             <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} pageContext="deleteProd" />
