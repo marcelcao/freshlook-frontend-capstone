@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useAuth } from '../utils/context/authContext';
@@ -9,6 +10,8 @@ import ProductCard from './ProductCard';
 export default function Filter() {
   const [allProducts, setAllProducts] = useState([]);
   const [cleansers, setCleansers] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState('All Products'); // Default to 'All Products'
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   const { user } = useAuth();
 
@@ -20,16 +23,14 @@ export default function Filter() {
     sortCleanser(user.uid).then(setCleansers);
   };
 
-  const handleChangeAllProducts = () => {
-    allProducts.map((products) => (
-      <ProductCard key={products.firebaseKey} prodObj={products} onUpdate={getAllProducts} pageContext="deleteProd" />
-    ));
-  };
+  const handleSelect = (value) => {
+    setSelectedFilter(value); // Update the selected filter
 
-  const handleChangeCleansers = () => {
-    cleansers.map((cleanser) => (
-      <ProductCard key={cleanser.firebaseKey} prodObj={cleanser} onUpdate={getAllCleansers} pageContext="deleteProd" />
-    ));
+    if (value === 'All Products') {
+      setFilteredProducts(allProducts);
+    } else if (value === 'Cleanser') {
+      setFilteredProducts(cleansers);
+    }
   };
 
   useEffect(() => {
@@ -37,16 +38,26 @@ export default function Filter() {
     getAllCleansers();
   }, []);
 
-  return (
-    <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Filter Products
-      </Dropdown.Toggle>
+  // Render the filtered products based on selected filter
+  const renderedProducts = filteredProducts.map((product) => (
+    <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} pageContext="deleteProd" />
+  ));
 
-      <Dropdown.Menu>
-        <Dropdown.Item onClick={handleChangeAllProducts}>All Products</Dropdown.Item>
-        <Dropdown.Item value="Cleanser" onChange={handleChangeCleansers}>Cleanser</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+  return (
+    <div>
+      <Dropdown onSelect={handleSelect}>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Filter Products
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item eventKey="All Products">All Products</Dropdown.Item>
+          <Dropdown.Item eventKey="Cleanser">Cleanser</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
+      {/* Render the filtered products */}
+      {renderedProducts}
+    </div>
   );
 }

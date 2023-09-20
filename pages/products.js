@@ -9,6 +9,7 @@ import Filter from '../components/Filter';
 
 function Products() {
   const [products, setProducts] = useState([]);
+  // set a state for showing products and map through showing products and pass it on as a prop to the filter function //
 
   const { user } = useAuth();
 
@@ -20,6 +21,7 @@ function Products() {
     getAllProducts();
   }, []);
 
+  // filters for search //
   const filterResult = (query) => {
     if (!query) {
       getAllProducts();
