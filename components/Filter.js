@@ -1,47 +1,46 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useAuth } from '../utils/context/authContext';
-import { getProducts } from '../utils/data/productData';
-import { sortCleanser } from '../utils/data/productType';
-import ProductCard from './ProductCard';
+import {
+  sortCleanser, sortSerum, sortMoisturizer, sortToner, sortCream, sortEssence, sortLotion, sortOil, sortExfoliant, sortSunscreen, sortMask, sortRemover, sortTreatment,
+} from '../utils/data/productType';
 
-export default function Filter() {
-  const [allProducts, setAllProducts] = useState([]);
-  const [cleansers, setCleansers] = useState([]);
-  const [selectedFilter, setSelectedFilter] = useState('All Products'); // Default to 'All Products'
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
+export default function Filter({ setShowProducts, products }) {
   const { user } = useAuth();
 
-  const getAllProducts = () => {
-    getProducts(user.uid).then(setAllProducts);
-  };
-
-  const getAllCleansers = () => {
-    sortCleanser(user.uid).then(setCleansers);
-  };
-
-  const handleSelect = (value) => {
-    setSelectedFilter(value); // Update the selected filter
-
-    if (value === 'All Products') {
-      setFilteredProducts(allProducts);
-    } else if (value === 'Cleanser') {
-      setFilteredProducts(cleansers);
+  const handleSelect = (eventKey) => {
+    if (eventKey === 'All Products') {
+      setShowProducts(products);
+    } else if (eventKey === 'Cleanser') {
+      sortCleanser(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Serum') {
+      sortSerum(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Moisturizer') {
+      sortMoisturizer(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Toner') {
+      sortToner(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Cream') {
+      sortCream(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Essence') {
+      sortEssence(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Lotion') {
+      sortLotion(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Oil') {
+      sortOil(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Exfoliant') {
+      sortExfoliant(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Sunscreen') {
+      sortSunscreen(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Mask') {
+      sortMask(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Remover') {
+      sortRemover(user.uid).then(setShowProducts);
+    } else if (eventKey === 'Treatment') {
+      sortTreatment(user.uid).then(setShowProducts);
     }
   };
-
-  useEffect(() => {
-    getAllProducts();
-    getAllCleansers();
-  }, []);
-
-  // Render the filtered products based on selected filter
-  const renderedProducts = filteredProducts.map((product) => (
-    <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} pageContext="deleteProd" />
-  ));
 
   return (
     <div>
@@ -53,11 +52,33 @@ export default function Filter() {
         <Dropdown.Menu>
           <Dropdown.Item eventKey="All Products">All Products</Dropdown.Item>
           <Dropdown.Item eventKey="Cleanser">Cleanser</Dropdown.Item>
+          <Dropdown.Item eventKey="Serum">Serum</Dropdown.Item>
+          <Dropdown.Item eventKey="Moisturizer">Moisturizer</Dropdown.Item>
+          <Dropdown.Item eventKey="Toner">Toner</Dropdown.Item>
+          <Dropdown.Item eventKey="Cream">Cream</Dropdown.Item>
+          <Dropdown.Item eventKey="Essence">Essence</Dropdown.Item>
+          <Dropdown.Item eventKey="Lotion">Lotion</Dropdown.Item>
+          <Dropdown.Item eventKey="Oil">Oil</Dropdown.Item>
+          <Dropdown.Item eventKey="Exfoliant">Exfoliant</Dropdown.Item>
+          <Dropdown.Item eventKey="Sunscreen">Sunscreen</Dropdown.Item>
+          <Dropdown.Item eventKey="Mask">Mask</Dropdown.Item>
+          <Dropdown.Item eventKey="Makeup Remover">Makeup Remover</Dropdown.Item>
+          <Dropdown.Item eventKey="Treatment">Treatment</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-
-      {/* Render the filtered products */}
-      {renderedProducts}
     </div>
   );
 }
+
+Filter.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({
+    prodImg: PropTypes.string,
+    prodName: PropTypes.string,
+    prodDescription: PropTypes.string,
+    firebaseKey: PropTypes.string,
+    productId: PropTypes.string,
+    routineId: PropTypes.string,
+    routProdKey: PropTypes.string,
+  })).isRequired,
+  setShowProducts: PropTypes.func.isRequired,
+};
