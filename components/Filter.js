@@ -45,7 +45,7 @@ export default function Filter({ setShowProducts, products }) {
   return (
     <div>
       <Dropdown onSelect={handleSelect}>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle className="filter-btn">
           Filter Products
         </Dropdown.Toggle>
 

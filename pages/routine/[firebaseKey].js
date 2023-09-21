@@ -26,9 +26,6 @@ function ViewRoutine() {
   };
 
   const getAllRoutineProducts = () => {
-    // need to also return the firebasekey along with the productId //
-    // before line 39, before pushing you want to add the routprod firebase key to userprod //
-
     const matched = [];
 
     products.forEach((userProd) => {
@@ -61,8 +58,8 @@ function ViewRoutine() {
 
   return (
     <>
-      <div className="mt-5 d-flex flex-wrap">
-        <div className="text-white ms-5 details">
+      <div className="single-rout-container">
+        <div>
           <h2>
             {routDetails.routineName}
           </h2>
