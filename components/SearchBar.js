@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
 
-export default function SearchBar({ onKeyUp }) {
+export default function SearchBar({ onChange }) {
   const handleChange = (e) => {
-    onKeyUp(e.target.value.toLowerCase());
+    onChange(e.target.value.toLowerCase());
   };
 
   return (
@@ -26,5 +26,5 @@ export default function SearchBar({ onKeyUp }) {
 }
 
 SearchBar.propTypes = {
-  onKeyUp: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };

@@ -5,9 +5,11 @@ import { useAuth } from '../utils/context/authContext';
 import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
 import SearchBar from '../components/SearchBar';
+import Filter from '../components/Filter';
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [showProducts, setShowProducts] = useState([]);
 
   const { user } = useAuth();
 
@@ -19,13 +21,13 @@ function Products() {
     getAllProducts();
   }, []);
 
+  useEffect(() => {
+    setShowProducts(products);
+  }, [products]);
+
   const filterResult = (query) => {
-    if (!query) {
-      getAllProducts();
-    } else {
-      const filter = products.filter((product) => product.prodName.toLowerCase().includes(query));
-      setProducts(filter);
-    }
+    const filter = products.filter((product) => product.prodName.toLowerCase().includes(query));
+    setShowProducts(filter);
   };
 
   return (
@@ -35,9 +37,10 @@ function Products() {
           <h1 className="prods-title">Your Products</h1>
           <ProductModal />
         </div>
-        <SearchBar onKeyUp={(query) => filterResult(query)} />
+        <SearchBar onChange={(query) => filterResult(query)} />
+        <Filter setShowProducts={setShowProducts} products={products} />
         <div className="prodcard-container">
-          {products.map((product) => (
+          {showProducts.map((product) => (
             <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} pageContext="deleteProd" />
           ))}
         </div>

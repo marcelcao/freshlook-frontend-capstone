@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -19,7 +18,6 @@ function RoutineModal({ obj }) {
 
   const [formInput, setFormInput] = useState(initialState);
   const { user } = useAuth();
-  // const router = useRouter();
 
   useEffect(() => {
     if (obj.firebaseKey) {
