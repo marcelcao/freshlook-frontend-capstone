@@ -37,8 +37,12 @@ function Products() {
           <h1 className="prods-title">Your Products</h1>
           <ProductModal />
         </div>
-        <SearchBar onChange={(query) => filterResult(query)} />
-        <Filter setShowProducts={setShowProducts} products={products} />
+        <div className="sorting-container">
+          <SearchBar onChange={(query) => filterResult(query)} />
+          <div className="filter-container">
+            <Filter setShowProducts={setShowProducts} products={products} />
+          </div>
+        </div>
         <div className="prodcard-container">
           {showProducts.map((product) => (
             <ProductCard key={product.firebaseKey} prodObj={product} onUpdate={getAllProducts} pageContext="deleteProd" />

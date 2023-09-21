@@ -61,7 +61,7 @@ a {
   color: #6C925C;
 }
 
-.sign-in-btn, .m-2, .routine-delete, .rout-modal, .sign-out-btn, .submit-btn, .prod-modal {
+.sign-in-btn, .m-2, .routine-delete, .rout-modal, .sign-out-btn, .submit-btn, .prod-modal, .filter-btn {
   background-color: #6C925C;
   color: white;
   text-align: center;
@@ -92,7 +92,7 @@ a {
   color:#6C925C;
 }
 
-.index-contain, .product-container, .single-prod-container {
+.index-contain, .product-container, .single-prod-container, .single-rout-container, .add-product-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -100,7 +100,7 @@ a {
   margin-left: 23rem;
 }
 
-.user-page, .single-prod-container {
+.user-page, .single-prod-container, .single-rout-container, .add-product-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -209,7 +209,7 @@ a {
 .search-input {
   border-color: #6C925C;
   border-radius: .5rem;
-  width: 100%;
+  width: 12rem;
   margin-top: 3rem;
 }
 
@@ -224,6 +224,15 @@ a {
   margin-top: 8rem;
 }
 
+.filter-btn {
+  height: 2.5rem;
+  margin-top: 2.5rem;
+  margin-left: 2rem;
+}
+
+.filter-container {
+  text-align: right;
+}
 .side-links {
   display: flex;
   flex-direction: column;
@@ -286,4 +295,9 @@ a {
   font-size: .5rem;
   margin-left: .25rem;
   background-color: #6C925C;
+}
+.sorting-container {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
 }
