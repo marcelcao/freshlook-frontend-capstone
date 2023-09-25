@@ -61,14 +61,14 @@ a {
   color: #6C925C;
 }
 
-.sign-in-btn, .m-2, .routine-delete, .rout-modal, .sign-out-btn, .submit-btn, .prod-modal, .filter-btn {
+.sign-in-btn, .m-2, .routine-delete, .rout-modal, .sign-out-btn, .submit-btn, .prod-modal, .filter-btn, .add-prods-btn {
   background-color: #6C925C;
   color: white;
   text-align: center;
   border-color: #6C925C;
 }
 
-.sign-in-btn:hover, .m-2:hover, .routine-delete:hover, .rout-modal:hover, .sign-out-btn:hover, .prod-modal:hover, .prod-btns:hover {
+.sign-in-btn:hover, .m-2:hover, .routine-delete:hover, .rout-modal:hover, .sign-out-btn:hover, .prod-modal:hover, .prod-btns:hover, .filter-btn:hover, .add-prods-btn:hover {
   background-color: #8C9887;
 }
 
@@ -133,13 +133,17 @@ a {
   margin-right: 2%;
 }
 
-.prodcard-container, .added-prods {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+.prodcard-container {
+  /* display: grid;
+  grid-template-columns: repeat(5, 1fr); */
   margin-top: 3rem;
   margin-bottom: 3rem;
-  justify-content: center;
+  justify-content: left;
+  /* flex-grow: 1; */
+  display: flex;
+  flex-basis: 33%;
   flex-grow: 1;
+  flex-wrap: wrap;
 }
 
 .index-items {
@@ -224,7 +228,7 @@ a {
   margin-top: 8rem;
 }
 
-.rout-modal {
+.rout-modal, .add-prods-btn {
   height: 2.5rem;
   margin-top: 3rem;
   width: 10rem;
@@ -345,10 +349,16 @@ a {
   text-align: left;
 }
 
-.single-rout-item {
+.single-rout-item, .routine-products-content {
   margin-left: 5rem;
   margin-top: 5rem;
   color: #636562;
+  font-size: 1.5rem;
+}
+
+.routine-products-content {
+  margin-left: 5rem;
+  margin-top: 1rem;
   font-size: 1.5rem;
 }
 
@@ -363,4 +373,22 @@ a {
   justify-content: right;
   margin-right: 3rem;
   height: 2rem;
+}
+
+.added-prods {
+  display: flex;
+  flex-basis: 33%;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.rout-prod-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.add-prods-btn {
+  margin-right: 3rem;
 }

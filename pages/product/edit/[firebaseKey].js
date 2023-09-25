@@ -30,20 +30,26 @@ export default function EditProduct() {
     <>
       <div className="single-prod-container">
         <div className="single-prod-item">
-          <img src={editProd.prodImg} alt="Product" width="200px" height="300px" className="view-prod-photo" />
-          <h2>
+          <img src={editProd.prodImg} alt="Product" className="view-prod-photo" />
+          <h1 className="prod-title">
             {editProd.prodName}
-          </h2>
-          <h2>
-            Product Type:
-          </h2>
-          {prodTypeKey.typeObj?.label}
-          <h2>
-            Description:
-          </h2>
-          {editProd.prodDescription}
+          </h1>
         </div>
-        <ProductModal obj={editProd} key={firebaseKey} />
+        <div className="product-content">
+          <div className="product-heading">
+            <h2 className="prod-category">
+              Product Type:
+            </h2>
+            {prodTypeKey.typeObj?.label}
+            <h2 className="prod-category">
+              Description:
+            </h2>
+            {editProd.prodDescription}
+          </div>
+        </div>
+        <div className="product-update-btn">
+          <ProductModal obj={editProd} key={firebaseKey} />
+        </div>
       </div>
     </>
   );

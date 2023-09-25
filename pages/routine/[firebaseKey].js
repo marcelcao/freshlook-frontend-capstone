@@ -71,10 +71,12 @@ function ViewRoutine() {
           </p>
         </div>
         <div className="routine-products-content">
-          <h2>Your Routine Products</h2>
-          <Link href={`/routine/addProduct/${firebaseKey}`} passHref>
-            <Button variant="primary" className="m-2">ADD PRODUCTS</Button>
-          </Link>
+          <div className="rout-prod-head">
+            <h2 className="rout-category">Your Routine Products</h2>
+            <Link href={`/routine/addProduct/${firebaseKey}`} passHref>
+              <Button variant="primary" className="add-prods-btn">ADD PRODUCTS</Button>
+            </Link>
+          </div>
           <div className="added-prods">
             {matchedProducts.map((routProd) => (
               <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getRoutProds} pageContext="deleteRoutProd" />
