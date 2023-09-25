@@ -59,14 +59,16 @@ function ViewRoutine() {
   return (
     <>
       <div className="single-rout-container">
-        <div>
-          <h2>
+        <div className="update-rout-btn">
+          <RoutineModal obj={routDetails} key={firebaseKey} />
+        </div>
+        <div className="single-rout-item">
+          <h2 className="rout-category">
             {routDetails.routineName}
           </h2>
-          <h2>
+          <p>
             {routDetails.routineDescription}
-          </h2>
-          <RoutineModal obj={routDetails} key={firebaseKey} />
+          </p>
         </div>
         <div className="routine-products-content">
           <h2>Your Routine Products</h2>
