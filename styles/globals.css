@@ -291,7 +291,7 @@ a {
   text-align: right;
 }
 
-.prod-btns {
+.prod-btns, .prod-delete {
   font-size: .5rem;
   margin-left: .25rem;
   background-color: #6C925C;

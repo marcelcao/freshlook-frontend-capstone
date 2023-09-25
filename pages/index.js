@@ -8,6 +8,7 @@ import SearchBar from '../components/SearchBar';
 
 function Home() {
   const [routines, setRoutines] = useState([]);
+  const [showRoutines, setShowRoutines] = useState([]);
 
   const { user } = useAuth();
 
@@ -19,13 +20,13 @@ function Home() {
     getAllRoutines();
   }, []);
 
+  useEffect(() => {
+    setShowRoutines(routines);
+  }, [routines]);
+
   const filterResult = (query) => {
-    if (!query) {
-      getAllRoutines();
-    } else {
-      const filter = routines.filter((routine) => routine.routineName.toLowerCase().includes(query));
-      setRoutines(filter);
-    }
+    const filter = routines.filter((routine) => routine.routineName.toLowerCase().includes(query));
+    setShowRoutines(filter);
   };
 
   return (
@@ -38,11 +39,11 @@ function Home() {
               <RoutineModal />
             </div>
             <div className="search-rout">
-              <SearchBar onKeyUp={(query) => filterResult(query)} />
+              <SearchBar onChange={(query) => filterResult(query)} />
             </div>
           </div>
           <div className="routine-cards-contain">
-            {routines.map((routine) => (
+            {showRoutines.map((routine) => (
               <RoutineCard key={routine.firebaseKey} routineObj={routine} onUpdate={getAllRoutines} />
             ))}
           </div>
