@@ -59,20 +59,24 @@ function ViewRoutine() {
   return (
     <>
       <div className="single-rout-container">
-        <div>
-          <h2>
-            {routDetails.routineName}
-          </h2>
-          <h2>
-            {routDetails.routineDescription}
-          </h2>
+        <div className="update-rout-btn">
           <RoutineModal obj={routDetails} key={firebaseKey} />
         </div>
+        <div className="single-rout-item">
+          <h2 className="rout-category">
+            {routDetails.routineName}
+          </h2>
+          <p>
+            {routDetails.routineDescription}
+          </p>
+        </div>
         <div className="routine-products-content">
-          <h2>Your Routine Products</h2>
-          <Link href={`/routine/addProduct/${firebaseKey}`} passHref>
-            <Button variant="primary" className="m-2">ADD PRODUCTS</Button>
-          </Link>
+          <div className="rout-prod-head">
+            <h2 className="rout-category">Your Routine Products</h2>
+            <Link href={`/routine/addProduct/${firebaseKey}`} passHref>
+              <Button variant="primary" className="add-prods-btn">ADD PRODUCTS</Button>
+            </Link>
+          </div>
           <div className="added-prods">
             {matchedProducts.map((routProd) => (
               <ProductCard key={routProd.firebaseKey} prodObj={routProd} onUpdate={getRoutProds} pageContext="deleteRoutProd" />
