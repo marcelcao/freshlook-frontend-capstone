@@ -69,26 +69,27 @@ function AddProductsToRoutine() {
     <>
       <div className="add-product-container">
         <div>
-          <h2>
+          <h2 className="rout-category">
             Add Products to {routDetails.routineName}
           </h2>
           <h2>
             Your Available Products:
           </h2>
-          <div>
+          <div className="available-prods">
             {products.map((item) => (
               <Form key={item.firebaseKey}>
                 <Form.Group>
-                  <div>
-                    <Form.Check type="checkbox" label={item.prodName} value={item.productId} onChange={handleChange} />
+                  <div className="checkform">
                     <div>
                       <img src={item.prodImg} alt={item.prodName} height="100rem" />
                     </div>
+                    <Form.Check type="checkbox" label={item.prodName} value={item.productId} onChange={handleChange} />
                   </div>
                 </Form.Group>
               </Form>
-            ))}<Button onClick={handleSubmit}>Add Products</Button>
+            ))}
           </div>
+          <Button onClick={handleSubmit} className="add-rout-prods-btn">Add Products</Button>
         </div>
       </div>
     </>

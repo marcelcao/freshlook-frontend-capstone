@@ -61,14 +61,14 @@ a {
   color: #6C925C;
 }
 
-.sign-in-btn, .m-2, .routine-delete, .rout-modal, .sign-out-btn, .submit-btn, .prod-modal, .filter-btn, .add-prods-btn {
+.sign-in-btn, .m-2, .routine-delete, .rout-modal, .sign-out-btn, .submit-btn, .prod-modal, .filter-btn, .add-prods-btn, .add-rout-prods-btn {
   background-color: #6C925C;
   color: white;
   text-align: center;
   border-color: #6C925C;
 }
 
-.sign-in-btn:hover, .m-2:hover, .routine-delete:hover, .rout-modal:hover, .sign-out-btn:hover, .prod-modal:hover, .prod-btns:hover, .filter-btn:hover, .add-prods-btn:hover {
+.sign-in-btn:hover, .m-2:hover, .routine-delete:hover, .rout-modal:hover, .sign-out-btn:hover, .prod-modal:hover, .prod-btns:hover, .filter-btn:hover, .add-prods-btn:hover, .add-rout-prods-btn:hover {
   background-color: #8C9887;
 }
 
@@ -92,7 +92,7 @@ a {
   color:#6C925C;
 }
 
-.index-contain, .product-container, .single-prod-container, .single-rout-container, .add-product-container {
+.index-contain, .product-container, .single-prod-container, .single-rout-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -108,6 +108,18 @@ a {
   margin-left: 23rem;
   margin-right: 2rem;
   text-align: center;
+  background-color: #FBF4E0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: #636562;
+}
+
+.add-product-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 5rem;
+  margin-right: 2rem;
   background-color: #FBF4E0;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -383,6 +395,16 @@ a {
   margin-top: 1rem;
 }
 
+.available-prods {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-basis: 33%;
+  flex-grow: 1;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .rout-prod-head {
   display: flex;
   flex-direction: row;
@@ -391,4 +413,12 @@ a {
 
 .add-prods-btn {
   margin-right: 3rem;
+}
+
+.checkform {
+  margin-left: .5rem;
+}
+
+.add-rout-prods-btn {
+  margin-top: 2rem;
 }
