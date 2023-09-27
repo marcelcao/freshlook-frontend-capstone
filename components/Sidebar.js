@@ -15,7 +15,7 @@ export default function Sidebar() {
         <div className="side-links">
           <div>
             <div>
-              <h1>freshlook</h1>
+              <img src="/icons/freshlook.png" alt="brand tagline" className="sidebar-logo" />
             </div>
             <div className="page-links">
               <Link passHref href="/">
