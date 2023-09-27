@@ -20,7 +20,7 @@ Recognizing this need underscores the importance of embracing tailored skincare 
 - A simple, but fresh user-interface aesthetic, embodying the “freshlook” idea
 
 ## Video Walkthrough
-- [Loom Video] 
+- [Loom Video](https://www.loom.com/share/4b5de6e3e88d4cd78e6e1b236266e033?sid=afb58bf7-9f19-4235-8d1a-3ec3dd334b9b)
 
 ## Relevant Links 
 - [Check out the deployed site](https://freshlook-skincare.netlify.app/)
