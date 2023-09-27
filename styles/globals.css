@@ -54,6 +54,7 @@ a {
   width: 50%;
   text-align: center;
   margin-left: 25%;
+  font-size: large;
 }
 
 .logo-contain {
@@ -146,15 +147,12 @@ a {
 }
 
 .prodcard-container {
-  /* display: grid;
-  grid-template-columns: repeat(5, 1fr); */
   margin-top: 3rem;
   margin-bottom: 3rem;
   justify-content: left;
-  /* flex-grow: 1; */
   display: flex;
   flex-basis: 33%;
-  flex-grow: 1;
+  flex-grow: 2;
   flex-wrap: wrap;
 }
 
@@ -421,4 +419,17 @@ a {
 
 .add-rout-prods-btn {
   margin-top: 2rem;
+}
+
+.prod-icon {
+  width: 1rem;
+}
+
+.signin-icon {
+  height: 5rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-logo {
+  width: 13rem;
 }

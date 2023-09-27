@@ -22,13 +22,17 @@ export default function RoutineCard({ routineObj, onUpdate }) {
           <Card.Title>{routineObj.routineName} </Card.Title>
           <div className="routcard-btns">
             <Link href={`/routine/${routineObj.firebaseKey}`} passHref>
-              <Button variant="primary" className="m-2">VIEW</Button>
+              <Button variant="primary" className="m-2">
+                <img src="/icons/viewicon.png" alt="view button" className="card-icon" />
+              </Button>
             </Link>
             <Link href={`/routine/${routineObj.firebaseKey}`} passHref>
-              <Button variant="primary" className="m-2">EDIT</Button>
+              <Button variant="primary" className="m-2">
+                <img src="/icons/editicon.png" alt="edit button" className="card-icon" />
+              </Button>
             </Link>
             <Button onClick={deleteThisRoutine} className="routine-delete">
-              <img src="/icons/deleteicon.png" alt="delete button" className="delete-icon" />
+              <img src="/icons/trashicon.png" alt="delete button" className="card-icon" />
             </Button>
           </div>
         </div>

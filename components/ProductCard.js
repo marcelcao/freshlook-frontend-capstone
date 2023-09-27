@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -29,7 +30,7 @@ export default function ProductCard({
       return (
         <>
           <Button onClick={deleteThisProduct} className="prod-btns">
-            D
+            <img src="/icons/trashicon.png" alt="delete button" className="prod-icon" />
           </Button>
         </>
       );
@@ -37,7 +38,7 @@ export default function ProductCard({
       return (
         <>
           <Button onClick={deleteThisRoutProd} className="prod-delete">
-            REMOVE
+            <img src="/icons/trashicon.png" alt="delete button" className="prod-icon" />
           </Button>
         </>
       );
@@ -51,10 +52,14 @@ export default function ProductCard({
         <Card.Title className="product-card-title">{prodObj.prodName} </Card.Title>
         <div className="prod-btn-container">
           <Link href={`/product/${prodObj.productId}`} passHref>
-            <Button className="prod-btns">V</Button>
+            <Button className="prod-btns">
+              <img src="/icons/viewicon.png" alt="view button" className="prod-icon" />
+            </Button>
           </Link>
           <Link href={`/product/edit/${prodObj.productId}`} passHref>
-            <Button className="prod-btns">E</Button>
+            <Button className="prod-btns">
+              <img src="/icons/editicon.png" alt="edit button" className="prod-icon" />
+            </Button>
           </Link>
           {renderDeleteBtns()}
         </div>

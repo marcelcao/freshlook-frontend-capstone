@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { signIn } from '../utils/auth';
@@ -10,16 +11,16 @@ function Signin() {
         <div className="sign-in-contain">
           <div className="copy-items">
             <div className="copy">
-              <h1>icon</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <img src="/icons/faceicon.png" alt="flower icon" className="signin-icon" />
+              <p>Never miss a step again! Create and organize your personalized list of skincare routines.</p>
             </div>
             <div className="copy">
-              <h1>icon</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <img src="/icons/sorticon.png" alt="flower icon" className="signin-icon" />
+              <p>Catalog your skincare routine products and assign them to your routines!</p>
             </div>
             <div className="copy">
-              <h1>icon</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <img src="/icons/flowericon.png" alt="flower icon" className="signin-icon" />
+              <p>Simplify, steamline and enhance your path to radiant, healthy skin</p>
             </div>
           </div>
         </div>
@@ -31,10 +32,9 @@ function Signin() {
           </Button>
         </div>
         <div className="logo-contain">
-          <h1>freshlook</h1>
-          <p>transform your skin</p>
-          <p>one step at a time</p>
+          <img src="/icons/freshlook.png" alt="freshlook logo" className="signin-logo" />
         </div>
+        <img src="/icons/tagline.png" alt="brand tagline" className="signin-tagline" />
         <Footer className="sign-in-footer" />
       </div>
     </>
