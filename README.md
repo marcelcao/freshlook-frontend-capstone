@@ -30,7 +30,19 @@ Recognizing this need underscores the importance of embracing tailored skincare 
 
 ## Project Screenshots 
 
+<img width="1909" alt="Screenshot 2023-09-27 at 6 37 34 PM (2)" src="https://github.com/marcelcao/freshlook-frontend-capstone/assets/123406421/64000e70-2cb1-4c94-8452-915c97773863">
+<img width="1894" alt="Screenshot 2023-09-27 at 6 37 43 PM (2)" src="https://github.com/marcelcao/freshlook-frontend-capstone/assets/123406421/5e358113-4a23-4ced-bbc3-e785e1bb3ed3">
+<img width="1905" alt="Screenshot 2023-09-27 at 6 37 55 PM (2)" src="https://github.com/marcelcao/freshlook-frontend-capstone/assets/123406421/5123cc0b-6ff4-44d2-a3b7-2ae935aa137e">
+
+
 ## Tech Stack
+- ReactJS
+- Javascript
+- Google Firebase
+- Figma
+- React Bootstrap
+- CSS
+- Adobe Illustrator
 
 ## Contributors
 - Mara Caoile (https://github.com/marcelcao)
