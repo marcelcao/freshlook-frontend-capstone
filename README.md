@@ -1,4 +1,4 @@
-# freshlook
+# freshlook [![Netlify Status](https://api.netlify.com/api/v1/badges/1106810a-4862-432f-a99f-8d10e93ecbee/deploy-status)](https://app.netlify.com/sites/freshlook-skincare/deploys)
 
 In today’s society, the demand for personalized skincare routines has surged across genders and generations due to environmental factors, stressors, and lifestyles. 
 Recognizing this need underscores the importance of embracing tailored skincare for improved skin health and a holistic well-being.
@@ -23,7 +23,7 @@ Recognizing this need underscores the importance of embracing tailored skincare 
 - [Loom Video] 
 
 ## Relevant Links 
-- [Check out the deployed site]
+- [Check out the deployed site](https://freshlook-skincare.netlify.app/)
 - [Figma Wireframe](https://www.figma.com/file/h3K2JmOrXQrEmPGW91AxAX/Freshlook---Frontend-Capstone---Mara-Caoile?type=design&node-id=0-1&mode=design&t=VwOuUO61lPjjCG3s-0)
 - [ERD](https://dbdiagram.io/d/Freshlook-Frontend-Capstone-ERD-64d1437b02bd1c4a5e623c59)
 - [Project Board](https://github.com/users/marcelcao/projects/4)
